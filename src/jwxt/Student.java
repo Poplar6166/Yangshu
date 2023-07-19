@@ -1,4 +1,8 @@
-public class Student implements SuperStudent{
+package jwxt;
+
+import jwxt.SuperStudent;
+
+public class Student implements SuperStudent {
     public static void main(String[] args){
 
     }

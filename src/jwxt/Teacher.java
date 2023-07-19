@@ -1,6 +1,8 @@
+package jwxt;
+
 import java.util.Scanner;
 
-public class Teacher implements SuperTeacher{
+public class Teacher implements SuperTeacher {
 
     public static void main(String[] args){
 

@@ -1,3 +1,5 @@
+package jwxt;
+
 import javax.swing.text.TabSet;
 
 interface SuperStudent {

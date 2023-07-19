@@ -1,3 +1,5 @@
+package jwxt;
+
 interface SuperTeacher {
     void setTName(String name);
     void setTAge(int age);

@@ -1,3 +1,5 @@
+package jwxt;
+
 interface SuperManager {
     void setMName(String name);
     void setMAge(int age);

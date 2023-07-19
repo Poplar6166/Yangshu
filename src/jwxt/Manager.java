@@ -1,4 +1,6 @@
-public class Manager implements SuperManager{
+package jwxt;
+
+public class Manager implements SuperManager {
 
     public static void main(String[] args){
 
