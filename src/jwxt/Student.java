@@ -1,76 +1,86 @@
 package jwxt;
 
-import jwxt.SuperStudent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Student implements SuperStudent {
-    public static void main(String[] args){
+public class Student {
+    ArrayList<String> StudentIdList = new ArrayList<>();
+    ArrayList<String> StudentNameList = new ArrayList<>();
+    ArrayList<Integer> StudentAgeList = new ArrayList<Integer>();
+    ArrayList<String> StudentSexList = new ArrayList<>();
+    ArrayList<String> StudentYearList = new ArrayList<>();
+    ArrayList<String> StudentPhoneList = new ArrayList<>();
+    ArrayList<String> StudentBumenList = new ArrayList<>();
+    ArrayList<String> StudentSusheList = new ArrayList<>();
+    ArrayList<String> StudentBanjiList = new ArrayList<>();
+    ArrayList<String> StudentBandaoshiList = new ArrayList<>();
+    ArrayList<String> TeacherIdList = new ArrayList<>();
 
-    }
-    private String name;
-    private int age;
-    private String sex;
-    private String year;
-    private String phone;
-    private String xuehao;
-    private String kecheng;
-    private String bumen;
-    public void setSName(String name){
-        this.name = name;
-    }
-    public void setSAge(int age){
-        this.age = age;
-    }
-    public void setSSex(String sex){
-        this.sex = sex;
-    }
-    public void setSYear(String year){
-        this.year = year;
-    }
-    public void setSPhone(String phone){
-        this.phone = phone;
-    }
-    public String getSName(){
-        return name;
-    }
-    public int getSAge(){
-        return age;
-    }
-    public String getSSex(){
-        return sex;
-    }
-    public String getSYear(){
-        return year;
-    }
-    public String getSPhone(){
-        return phone;
-    }
-    public void setXuehao(String xuehao){
-        this.xuehao = xuehao;
-    }
-    public void setKecheng(String kecheng){
-        this.kecheng = kecheng;
-    }
-    public void setBumen(String bumen){
-        this.bumen = bumen;
-    }
-    public String getXuehao(){
-        return xuehao;
-    }
-    public String getKecheng(){
-        return kecheng;
-    }
-    public String getBumen(){
-        return bumen;
-    }
-    public void show(){
-        System.out.println("student name is " + name);
-        System.out.println("student age is " + age);
-        System.out.println("student sex is " + sex);
-        System.out.println("student year is " + year);
-        System.out.println("student phone is " + phone);
-        System.out.println("Student xuehao is " + xuehao);
-        System.out.println("Student kecheng is " + kecheng);
-        System.out.println("Student bumen is " + bumen);
+    Map<String, Student> map = new HashMap<>();
+
+    public void addInformation(String studentId, String name, int age, String sex,String year,
+                               String phone,String bumen,String sushe,String banji,String bandaoshi) {
+        StudentIdList.add(studentId);
+        StudentNameList.add(name);
+        StudentAgeList.add(age);
+        StudentSexList.add(sex);
+        StudentYearList.add(year);
+        StudentPhoneList.add(phone);
+        StudentBumenList.add(bumen);
+        StudentSusheList.add(sushe);
+        StudentBanjiList.add(banji);
+        StudentBandaoshiList.add(bandaoshi);
+
+        map.put(studentId, this); // 使用 classId 作为键，将当前对象存储到 map 中
     }
 
+    public void show() {
+        for (Map.Entry<String, Student> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Student value = entry.getValue();
+            System.out.println("Key: " + key + ", Value: " + value.toString());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "StudentIdList=" + StudentIdList +
+                ", StudentNameList=" + StudentNameList +
+                ", StudentAgeList=" + StudentAgeList +
+                ", StudentSexList=" + StudentSexList +
+                ", StudentYearList=" + StudentYearList +
+                ", StudentPhoneList=" + StudentPhoneList +
+                ", StudentBumenList=" + StudentBumenList+
+                ", StudentSusheList=" + StudentSusheList+
+                ", StudentBanjiList=" + StudentBanjiList+
+                ", StudentBandaoshiList" + StudentBandaoshiList;
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student();
+        student.addInformation("3210411029", "贺", 1, "男",
+                "2021","213131","数据"
+                ,"22楼","信计211","刘");
+        student.show();
+        /*ArrayList<String> stuIdList = new ArrayList<String>();
+        ArrayList<String> nameList = new ArrayList<String>();
+        stuIdList.add("3210411111");
+        stuIdList.add("3210422222");
+        nameList.add("jack");
+        nameList.add("pick");
+        System.out.println(nameList);
+        System.out.println(stuIdList);
+        String firstName = nameList.get(0);
+        String firstStu_id = stuIdList.get(0);
+        System.out.println("第一个名字和学号是: " + firstStu_id + " " + firstName);
+        nameList.remove(1);
+        stuIdList.remove(1);
+        System.out.println("删除第二个位置以后剩下的名字: " + stuIdList);
+        System.out.println("删除第二个位置以后剩下的学号: " + nameList);
+        int size = nameList.size();
+        int size1 = stuIdList.size();
+        System.out.println("姓名列表大小为: " + size + " ,学号列表大小为 : " + stuIdList);
+         */
+    }
 }
