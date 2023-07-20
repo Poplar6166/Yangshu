@@ -1,10 +1,44 @@
 package jwxt;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Manager {
+        private String managerId;
+        private String managerName;
+        private int managerAge;
+        private String managerSex;
+        private Date managerYear;
+        private String managerPhone;
+        private void setInformation(String managerid, String managername, int age, String sex, Date year,String phone){
+                this.managerId = managerid;
+                this.managerName = managername;
+                this.managerAge = age;
+                this.managerSex = sex;
+                this.managerYear = year;
+                this.managerPhone = phone;
+        }
+        public String getManagerId(){
+                return this.managerId;
+        }
+        public String getManagerName(){
+                return this.managerName;
+        }
+        public int getManagerAge(){
+                return this.managerAge;
+        }
+        public String getManagerSex(){
+              return this.managerSex;
+        }
+        public Date getManagerYear(){
+                return this.managerYear;
+        }
+        public String getManagerPhone(){
+                return this.managerPhone;
+        }
+    /*
     ArrayList<String> ManagerIdList = new ArrayList<>();
     ArrayList<String> ManagerNameList = new ArrayList<>();
     ArrayList<Integer> ManagerAgeList = new ArrayList<>();
@@ -63,6 +97,7 @@ public class Manager {
         int size = nameList.size();
         int size1 = stuIdList.size();
         System.out.println("姓名列表大小为: " + size + " ,学号列表大小为 : " + stuIdList);
-         */
+
     }
+    */
 }

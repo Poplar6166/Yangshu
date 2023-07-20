@@ -1,10 +1,75 @@
 package jwxt;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Student {
+    private String studentId;
+    private String studentName;
+    private int studentAge;
+    private String studentSex;
+    private Date studentYear;
+    private String studentPhone;
+    private String studentBumen;
+    private String studentSushe;
+    private String studentBanji;
+    private String studentBandaoshi;
+    private void setInformation(String studentId, String name, int age, String sex,Date year,
+                                String phone,String bumen,String sushe,String banji,String bandaoshi){
+        this.studentId = studentId;
+        this.studentName = name;
+        this.studentAge = age;
+        this.studentSex = sex;
+        this.studentYear = year;
+        this.studentPhone = phone;
+        this.studentBumen = bumen;
+        this.studentSushe = sushe;
+        this.studentBanji = banji;
+        this.studentBandaoshi = bandaoshi;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public int getStudentAge() {
+        return studentAge;
+    }
+
+    public String getStudentSex() {
+        return studentSex;
+    }
+
+    public Date getStudentYear() {
+        return studentYear;
+    }
+
+    public String getStudentPhone() {
+        return studentPhone;
+    }
+
+    public String getStudentBumen() {
+        return studentBumen;
+    }
+
+    public String getStudentSushe() {
+        return studentSushe;
+    }
+
+    public String getStudentBanji() {
+        return studentBanji;
+    }
+
+    public String getStudentBandaoshi() {
+        return studentBandaoshi;
+    }
+    /*
     ArrayList<String> StudentIdList = new ArrayList<>();
     ArrayList<String> StudentNameList = new ArrayList<>();
     ArrayList<Integer> StudentAgeList = new ArrayList<Integer>();
@@ -81,6 +146,8 @@ public class Student {
         int size = nameList.size();
         int size1 = stuIdList.size();
         System.out.println("姓名列表大小为: " + size + " ,学号列表大小为 : " + stuIdList);
-         */
+
     }
+
+     */
 }

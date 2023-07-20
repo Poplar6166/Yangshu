@@ -1,11 +1,57 @@
 package jwxt;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Teacher {
-    ArrayList<String> TeacherIdList = new ArrayList<>();
+    private String TeacherId;
+    private String TeacherName;
+    private int TeacherAge;
+    private String TeacherSex;
+    private Date TeacherYear;
+    private String TeacherPhone;
+    private String TeacherBumen;
+    private void setInformation(String teacherid, String name, int age, String sex,
+                                Date year, String phone,String bumen){
+        this.TeacherId = teacherid;
+        this.TeacherName = name;
+        this.TeacherAge = age;
+        this.TeacherSex = sex;
+        this.TeacherYear = year;
+        this.TeacherPhone = phone;
+        this.TeacherBumen = bumen;
+    }
+
+    public String getTeacherId() {
+        return TeacherId;
+    }
+
+    public String getTeacherName() {
+        return TeacherName;
+    }
+
+    public int getTeacherAge() {
+        return TeacherAge;
+    }
+
+    public String getTeacherSex() {
+        return TeacherSex;
+    }
+
+    public Date getTeacherYear() {
+        return TeacherYear;
+    }
+
+    public String getTeacherPhone() {
+        return TeacherPhone;
+    }
+
+    public String getTeacherBumen() {
+        return TeacherBumen;
+    }
+    /*ArrayList<String> TeacherIdList = new ArrayList<>();
     ArrayList<String> TeacherNameList = new ArrayList<>();
     ArrayList<Integer> TeacherAgeList = new ArrayList<>();
     ArrayList<String> TeacherSexList = new ArrayList<>();
@@ -69,6 +115,7 @@ public class Teacher {
         int size = nameList.size();
         int size1 = stuIdList.size();
         System.out.println("姓名列表大小为: " + size + " ,学号列表大小为 : " + stuIdList);
-         */
+
     }
+    */
 }

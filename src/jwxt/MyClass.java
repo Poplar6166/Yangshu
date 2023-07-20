@@ -1,11 +1,44 @@
 package jwxt;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MyClass {
-    ArrayList<String> ClassIdList = new ArrayList<>();
+    private String classId;
+    private String className;
+    private String sc;
+    private String studentId;
+    private String teacherId;
+    private void setInformation(String classId,String className,String sc,String studentId,String teacherId){
+        this.classId = classId;
+        this.className = className;
+        this.sc = sc;
+        this.studentId = studentId;
+        this.teacherId = teacherId;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public String getSc() {
+        return sc;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+    /*ArrayList<String> ClassIdList = new ArrayList<>();
     ArrayList<String> NameList = new ArrayList<>();
     ArrayList<String> ScList = new ArrayList<>();
     ArrayList<String> StudentIdList = new ArrayList<>();
@@ -62,6 +95,7 @@ public class MyClass {
         int size = nameList.size();
         int size1 = stuIdList.size();
         System.out.println("姓名列表大小为: " + size + " ,学号列表大小为 : " + stuIdList);
-         */
+
     }
+    */
 }
