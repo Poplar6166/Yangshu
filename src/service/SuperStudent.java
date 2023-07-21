@@ -11,4 +11,6 @@ interface SuperStudent {
     void add(Student student);
     void delete(String stuId);
     void change(Student student);
+    void addStudent(String studentId, String name, int age, String sex,Date year,
+             String phone,String bumen,String sushe,String banji,String bandaoshi);
 }

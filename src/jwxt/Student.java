@@ -1,9 +1,7 @@
 package jwxt;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Student {
     private String studentId;
@@ -16,8 +14,11 @@ public class Student {
     private String studentSushe;
     private String studentBanji;
     private String studentBandaoshi;
-    private void setInformation(String studentId, String name, int age, String sex,Date year,
-                                String phone,String bumen,String sushe,String banji,String bandaoshi){
+
+
+
+    public Student(String studentId, String name, int age, String sex, Date year,
+                   String phone, String bumen, String sushe, String banji, String bandaoshi){
         this.studentId = studentId;
         this.studentName = name;
         this.studentAge = age;

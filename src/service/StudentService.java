@@ -25,4 +25,9 @@ public class StudentService implements SuperStudent{
     public void change(Student student){
         data.put(student.getStudentId(),student);
     }
+    public void addStudent(String studentId, String name, int age, String sex,Date year,
+                           String phone,String bumen,String sushe,String banji,String bandaoshi) {
+        Student student = new Student(studentId, name, age, sex,year,phone,bumen,sushe,banji,bandaoshi);
+        add(student);
+    }
 }
