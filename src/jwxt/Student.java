@@ -31,6 +31,18 @@ public class Student {
         this.studentBandaoshi = bandaoshi;
     }
 
+    public Student() {
+
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
     public String getStudentId() {
         return studentId;
     }
@@ -69,6 +81,11 @@ public class Student {
 
     public String getStudentBandaoshi() {
         return studentBandaoshi;
+    }
+
+    @Override
+    public String toString() {
+        return studentId + studentName;
     }
     /*
     ArrayList<String> StudentIdList = new ArrayList<>();

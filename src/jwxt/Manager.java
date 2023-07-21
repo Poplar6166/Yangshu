@@ -38,6 +38,10 @@ public class Manager {
         public String getManagerPhone(){
                 return this.managerPhone;
         }
+
+        public static void main(String[] args) {
+
+        }
     /*
     ArrayList<String> ManagerIdList = new ArrayList<>();
     ArrayList<String> ManagerNameList = new ArrayList<>();
