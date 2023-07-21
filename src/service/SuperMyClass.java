@@ -1,10 +1,17 @@
 package service;
 
+import jwxt.Manager;
+import jwxt.MyClass;
+import jwxt.Teacher;
+
 import java.util.Date;
 
 interface SuperMyClass {
-    void show(String Classid, String name, String sc, String studentId,String teacherId);
-    void add(String Classid, String name, String sc, String studentId,String teacherId);
-    void delete(String Classid, String name, String sc, String studentId,String teacherId);
-    void change(String Classid, String name, String sc, String studentId,String teacherId);
+    MyClass show(String ClassId);
+
+    void add(MyClass myClass);
+
+    void delete(String Classid);
+
+    void change(MyClass myClass);
 }

@@ -1,18 +1,24 @@
 package service;
-
+import jwxt.Teacher;
 import java.util.Date;
-
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 public class TeacherService implements SuperTeacher{
-    public void show(String id, String name, int age, String sex, Date year, String phone, String bumen){
-
+    Map<String,Teacher> data = new HashMap<>();
+    public List<Teacher> getAll(){
+        return data.values().stream().toList();
     }
-    public void add(String id, String name, int age, String sex, Date year, String phone,String bumen){
-
+    public Teacher show(String id){
+        return data.get(id);
     }
-    public void delete(String id, String name, int age, String sex, Date year, String phone,String bumen){
-
+    public void add(Teacher teacher){
+        data.put(teacher.getTeacherId(),teacher);
     }
-    public void change(String id, String name, int age, String sex, Date year, String phone,String bumen){
-
+    public void delete(String id){
+        data.remove(id);
+    }
+    public void change(Teacher teacher){
+        data.put(teacher.getTeacherId(),teacher);
     }
 }

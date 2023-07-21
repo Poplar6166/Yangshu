@@ -1,11 +1,16 @@
 package service;
 
+import jwxt.Manager;
+
 import java.util.Date;
 
 interface SuperManager {
-    void show(String id, String name, int age, String sex, Date year,String phone);
-    void add(String id, String name, int age, String sex, Date year,String phone);
-    void delete(String id, String name, int age, String sex, Date year,String phone);
-    void change(String id, String name, int age, String sex, Date year,String phone);
+    Manager show(String id);
+
+    void add(Manager manager);
+
+    void delete(String id);
+
+    void change(Manager manager);
 
 }

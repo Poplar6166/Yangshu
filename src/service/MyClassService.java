@@ -1,16 +1,30 @@
 package service;
 
-public class MyClassService implements SuperMyClass{
-    public void show(String Classid, String name, String sc, String studentId,String teacherId){
+import jwxt.MyClass;
+import jwxt.Teacher;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class MyClassService implements SuperMyClass {
+    Map<String, MyClass> data = new HashMap<>();
+    public List<MyClass> getAll(){
+        return data.values().stream().toList();
     }
-    public void add(String Classid, String name, String sc, String studentId,String teacherId){
-
+    public MyClass show(String ClassId) {
+        return data.get(ClassId);
     }
-    public void delete(String Classid, String name, String sc, String studentId,String teacherId){
 
+    public void add(MyClass myClass) {
+        data.put(myClass.getClassId(),myClass);
     }
-    public void change(String Classid, String name, String sc, String studentId,String teacherId){
 
+    public void delete(String Classid) {
+        data.remove(Classid);
+    }
+
+    public void change(MyClass myClass) {
+        data.put(myClass.getClassId(),myClass);
     }
 }
