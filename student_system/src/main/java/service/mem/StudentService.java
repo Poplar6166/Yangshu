@@ -24,8 +24,7 @@ public class StudentService implements SuperStudent {
             return false;
         }
         else
-            data.remove(stuId);
-        return true;
+            return true;
     }
     public void change(Student student){
         data.put(student.getStudentId(),student);
