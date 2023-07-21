@@ -1,7 +1,7 @@
-package service;
+package service.mem;
 
 import jwxt.MyClass;
-import jwxt.Teacher;
+import service.SuperMyClass;
 
 import java.util.HashMap;
 import java.util.List;

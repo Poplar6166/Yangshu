@@ -1,13 +1,14 @@
-package service;
+package service.mem;
 
 import jwxt.Student;
+import service.SuperStudent;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StudentService implements SuperStudent{
+public class StudentService implements SuperStudent {
     Map<String, Student> data = new HashMap<>();
     public List<Student> getAll(){
         return data.values().stream().toList();

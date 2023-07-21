@@ -2,9 +2,7 @@ package service;
 
 import jwxt.Manager;
 
-import java.util.Date;
-
-interface SuperManager {
+public interface SuperManager {
     Manager show(String id);
 
     void add(Manager manager);

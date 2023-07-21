@@ -4,7 +4,7 @@ import jwxt.Student;
 
 import java.util.Date;
 
-interface SuperStudent {
+public interface SuperStudent {
 
     Student show(String stuId);
     void add(Student student);

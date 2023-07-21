@@ -1,12 +1,8 @@
 package service;
 
-import jwxt.Manager;
 import jwxt.MyClass;
-import jwxt.Teacher;
 
-import java.util.Date;
-
-interface SuperMyClass {
+public interface SuperMyClass {
     MyClass show(String ClassId);
 
     void add(MyClass myClass);

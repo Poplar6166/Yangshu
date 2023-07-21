@@ -1,10 +1,11 @@
-package service;
+package service.mem;
 import jwxt.Teacher;
-import java.util.Date;
+import service.SuperTeacher;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-public class TeacherService implements SuperTeacher{
+public class TeacherService implements SuperTeacher {
     Map<String,Teacher> data = new HashMap<>();
     public List<Teacher> getAll(){
         return data.values().stream().toList();
