@@ -27,6 +27,7 @@ public class Entrance {
                     System.out.println("choise 0 : add your information");
                     System.out.println("choise 1 : show your information");
                     System.out.println("choise 2 : change your information");
+                    System.out.println("choise 3 : delete your information");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
                         case 0 :
@@ -71,6 +72,21 @@ public class Entrance {
                                 System.out.println(s);
                             }
                             break;
+                        case 2:
+                            Student student1 = new Student();
+                            System.out.println("请输入要修改的学生ID: ");
+                            student1.setStudentId(scanner.next());
+                            System.out.println("请输入要修改的姓名: ");
+                            student1.setStudentName(scanner.next());
+                            studentService.change(student1);
+                            break;
+                        case 3:
+                            Student student2 = new Student();
+                            System.out.println("请输入要删除的学生ID");
+                            student2.setStudentId(scanner.next());
+                            studentService.delete(student2.getStudentId());
+                            break;
+
                         default:
                             return;
                     }
