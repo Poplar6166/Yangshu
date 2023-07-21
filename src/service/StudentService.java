@@ -1,7 +1,6 @@
 package service;
 
 import jwxt.Student;
-import jwxt.Teacher;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -19,8 +18,13 @@ public class StudentService implements SuperStudent{
     public void add(Student student){
         data.put(student.getStudentId(),student);
     }
-    public void delete(String stuId){
-        data.remove(stuId);
+    public boolean delete(String stuId){
+        if(data.remove(stuId) == null){
+            return false;
+        }
+        else
+            data.remove(stuId);
+        return true;
     }
     public void change(Student student){
         data.put(student.getStudentId(),student);

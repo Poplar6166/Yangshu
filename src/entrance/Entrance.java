@@ -25,9 +25,10 @@ public class Entrance {
             switch (choise){
                 case 0:
                     System.out.println("choise 0 : add your information");
-                    System.out.println("choise 1 : show your information");
+                    System.out.println("choise 1 : print your information");
                     System.out.println("choise 2 : change your information");
                     System.out.println("choise 3 : delete your information");
+                    System.out.println("choise 4 : show your information");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
                         case 0 :
@@ -78,15 +79,31 @@ public class Entrance {
                             student1.setStudentId(scanner.next());
                             System.out.println("请输入要修改的姓名: ");
                             student1.setStudentName(scanner.next());
-                            studentService.change(student1);
+                            studentService.change(student1);//修改后的结果
+
                             break;
                         case 3:
                             Student student2 = new Student();
                             System.out.println("请输入要删除的学生ID");
-                            student2.setStudentId(scanner.next());
+                            student2.setStudentId(scanner.next());//是否删除成功
                             studentService.delete(student2.getStudentId());
+                            if(studentService.delete(student2.getStudentId()) == true){
+                                System.out.println("删除成功！");
+                            }else {
+                                System.out.println("查无此人!");
+                            }
                             break;
-
+                        case 4:
+                            Student student3 = new Student();
+                            System.out.println("请输入要显示的学生ID");
+                            student3.setStudentId(scanner.next());
+                            Student result = studentService.show(student3.getStudentId());
+                            if(result != null){
+                                System.out.println(result);
+                            }else {
+                                System.out.println("查无此人！");
+                            }
+                            break;
                         default:
                             return;
                     }
