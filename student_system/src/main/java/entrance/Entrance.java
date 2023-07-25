@@ -27,7 +27,7 @@ public class Entrance {
             switch (choise){
                 case 1:
                     System.out.println("choise 0 : add your information");
-                    System.out.println("choise 1 : print your information");
+                    System.out.println("choise 1 : print all students information");
                     System.out.println("choise 2 : change your information");
                     System.out.println("choise 3 : delete your information");
                     System.out.println("choise 4 : show your information");
@@ -98,12 +98,9 @@ public class Entrance {
                         case 4:
                             Student student3 = new Student();
                             System.out.println("请输入要显示的学生ID");
-                            student3.setStudentId(scanner.nextInt());
-                            if(studentService.findStudent(student3.getStudentId())){
-                                System.out.println("查找成功!");
-                            }else {
-                                System.out.println("查无此人!");
-                            }
+                            student3.setStudentId(scanner.nextLong());
+                            String s = studentService.findStudent(student3.getStudentId());
+                            System.out.println(s);
                             break;
                         default:
                             break;

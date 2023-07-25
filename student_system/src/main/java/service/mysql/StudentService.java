@@ -13,14 +13,9 @@ public class StudentService implements SuperStudent {
     String JDBC_PASSWORD = "root";
     @Override
     public List<Student> getAll() {
+
         return null;
     }
-
-    @Override
-    public Student show(long stuId) {
-        return null;
-    }
-
     @Override
     public void add(Student student) {
         try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
@@ -35,9 +30,7 @@ public class StudentService implements SuperStudent {
     }
 
     @Override
-    public boolean delete(long stuId) {
-        return false;
-    }
+
     public boolean studentdelete(long stuId){
         try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
             try(PreparedStatement ps = coon.prepareStatement("DELETE FROM Student WHERE stuID = ?")){
@@ -52,9 +45,7 @@ public class StudentService implements SuperStudent {
         return false;
     }
     @Override
-    public void change(Student student) {
 
-    }
     public boolean changeStudent(Student student){
         try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
             try(PreparedStatement ps = coon.prepareStatement("UPDATE Student SET stuName = ? WHERE stuID = ?")){
@@ -69,26 +60,20 @@ public class StudentService implements SuperStudent {
         }
         return false;
     }
-    public boolean findStudent(long studentId){
+    public String findStudent(long studentId){
         try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
             try(PreparedStatement ps = coon.prepareStatement("SELECT * FROM Student WHERE stuID = ?")){
                 ps.setObject(1,studentId);
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()) {
                     System.out.println("找到学生信息：");
-                    System.out.println("学生ID：" + rs.getLong("studentName"));
-                    System.out.println("学生姓名：" + rs.getString("stuID"));
-                    return true;
+                    return "学生ID：" + rs.getLong("stuID") + " 学生姓名：" + rs.getString("stuName");
                 }
             }
         }catch(SQLException e){
             throw new RuntimeException(e);
         }
-        return false;
-    }
-    @Override
-    public void addStudent(long studentId, String name, int age, String sex, Date year, String phone, String bumen, String sushe, String banji, String bandaoshi) {
-
+        return null;
     }
 
 
