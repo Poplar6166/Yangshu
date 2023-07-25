@@ -1,4 +1,4 @@
-package service.mem;
+package service.impl;
 
 import jwxt.MyClass;
 import service.SuperMyClass;

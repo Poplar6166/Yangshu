@@ -28,8 +28,7 @@ public class Teacher {
         return TeacherId;
     }
 
-    public String getTeacherName() {
-        return TeacherName;
+    public String getTeacherName() {return TeacherName;
     }
 
     public int getTeacherAge() {

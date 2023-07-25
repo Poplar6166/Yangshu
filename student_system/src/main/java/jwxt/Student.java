@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Student {
-    private String studentId;
+    private long studentId;
     private String studentName;
     private int studentAge;
     private String studentSex;
@@ -17,7 +17,7 @@ public class Student {
 
 
 
-    public Student(String studentId, String name, int age, String sex, Date year,
+    public Student(long studentId, String name, int age, String sex, Date year,
                    String phone, String bumen, String sushe, String banji, String bandaoshi){
         this.studentId = studentId;
         this.studentName = name;
@@ -35,7 +35,7 @@ public class Student {
 
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(long studentId) {
         this.studentId = studentId;
     }
 
@@ -43,7 +43,7 @@ public class Student {
         this.studentName = studentName;
     }
 
-    public String getStudentId() {
+    public long getStudentId() {
         return studentId;
     }
 

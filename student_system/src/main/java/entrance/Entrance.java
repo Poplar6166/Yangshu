@@ -1,25 +1,31 @@
 package entrance;
 import jwxt.*;
-import service.mem.StudentService;
+import service.SuperStudent;
+import service.mysql.StudentService;
 
+import java.sql.*;
 import java.util.List;
+import java.util.*;
 import java.util.Scanner;
 
 public class Entrance {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        StudentService studentService = new StudentService();
+        SuperStudent studentService = new StudentService();
+
+
         while(true) {
-            System.out.println("welcome to jwxt : ");
-            System.out.println("There are several options here :");
-            System.out.println("choise 0 : Student end");
-            System.out.println("choise 1 : Teacher end");
+            System.out.println("\uD83D\uDE18 " + "welcome to jwxt : ");
+            System.out.println("\uD83D\uDE0E" + "There are several options here :");
+            System.out.println("choise 0 : Leave system");
+            System.out.println("choise 1 : Student end");
             System.out.println("choise 2 : Manager end");
-            System.out.println("please input your choise : ");
+            System.out.println("choise 3 : Teacher end");
+            System.out.println("\uD83E\uDD14" + "please input your choise : ");
             int choise = scanner.nextInt();
             switch (choise){
-                case 0:
+                case 1:
                     System.out.println("choise 0 : add your information");
                     System.out.println("choise 1 : print your information");
                     System.out.println("choise 2 : change your information");
@@ -30,7 +36,7 @@ public class Entrance {
                         case 0 :
                             final Student student = new Student();
                             System.out.println("请输入学生ID: ");
-                            student.setStudentId(scanner.next());
+                            student.setStudentId(scanner.nextInt());
                             System.out.println("请输入姓名: ");
                             student.setStudentName(scanner.next());
                             studentService.add(student);
@@ -63,27 +69,27 @@ public class Entrance {
                         String bandaoshi = scanner.next();
                         */
                         case 1 :
-                            List<Student> stuentlist = studentService.getAll();
-                            System.out.println();
-                            for (Student s : stuentlist){
-                                System.out.println(s);
-                            }
+                            StudentService studentshow = new StudentService();
+                            studentshow.showStudent();
                             break;
                         case 2:
                             Student student1 = new Student();
                             System.out.println("请输入要修改的学生ID: ");
-                            student1.setStudentId(scanner.next());
+                            student1.setStudentId(scanner.nextInt());
                             System.out.println("请输入要修改的姓名: ");
                             student1.setStudentName(scanner.next());
-                            studentService.change(student1);//修改后的结果
+                            if(studentService.changeStudent(student1)){
+                                System.out.println("修改成功");//修改后的结果
+                            }else {
+                                System.out.println("ID不正确!");
+                            }
 
                             break;
                         case 3:
                             Student student2 = new Student();
                             System.out.println("请输入要删除的学生ID");
-                            student2.setStudentId(scanner.next());//是否删除成功
-                            studentService.delete(student2.getStudentId());
-                            if(studentService.delete(student2.getStudentId()) == true){
+                            student2.setStudentId(scanner.nextLong());//是否删除成功
+                            if(studentService.studentdelete(student2.getStudentId())){
                                 System.out.println("删除成功！");
                             }else {
                                 System.out.println("查无此人!");
@@ -92,16 +98,15 @@ public class Entrance {
                         case 4:
                             Student student3 = new Student();
                             System.out.println("请输入要显示的学生ID");
-                            student3.setStudentId(scanner.next());
-                            Student result = studentService.show(student3.getStudentId());
-                            if(result != null){
-                                System.out.println(result);
+                            student3.setStudentId(scanner.nextInt());
+                            if(studentService.findStudent(student3.getStudentId())){
+                                System.out.println("查找成功!");
                             }else {
-                                System.out.println("查无此人！");
+                                System.out.println("查无此人!");
                             }
                             break;
                         default:
-                            return;
+                            break;
                     }
 
                 /*case 1:
@@ -134,7 +139,12 @@ public class Entrance {
                     System.out.println("choise - : delete the class information");
                     System.out.println("请输入你需要的操作 : ");
                     */
+                default:
+                    break;
             }
+            if(choise == 0)
+                break;
+
 
 
         }

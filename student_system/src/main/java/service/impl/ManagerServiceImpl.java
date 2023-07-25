@@ -1,4 +1,4 @@
-package service.mem;
+package service.impl;
 
 import jwxt.Manager;
 import service.SuperManager;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ManagerService implements SuperManager {
+public class ManagerServiceImpl implements SuperManager {
     Map<String, Manager> data = new HashMap<>();
     public List<Manager> getAll(){
         return data.values().stream().toList();
