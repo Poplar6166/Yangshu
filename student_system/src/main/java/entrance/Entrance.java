@@ -1,7 +1,9 @@
 package entrance;
 import jwxt.*;
 import service.SuperStudent;
+import service.SuperTeacher;
 import service.mysql.StudentService;
+import service.mysql.TeacherService;
 
 import java.sql.*;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Entrance {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SuperStudent studentService = new StudentService();
+        SuperTeacher teacherService = new TeacherService();
 
 
         while(true) {
@@ -106,13 +109,58 @@ public class Entrance {
                             break;
                     }
 
-                /*case 1:
-                    System.out.println("choise 0 : add your information");
-                    System.out.println("choise 1 : show your information");
-                    System.out.println("choise 2 : show your student information");
-                    System.out.println("choise 2 : change the student information");
-                    System.out.println("请输入你需要的操作 : ");
                 case 2:
+                    System.out.println("choise 0 : add your information");
+                    System.out.println("choise 1 : find your information");
+                    System.out.println("choise 2 : show all information");
+                    System.out.println("choise 3 : change your information");
+                    System.out.println("choise 4 : delete your information");
+                    System.out.println("请输入你需要的操作 : ");
+                    switch (scanner.nextInt()){
+                        case 0:
+                            Teacher addteacher = new Teacher();
+                            System.out.println("请输入您的ID: ");
+                            long id = scanner.nextLong();
+                            System.out.println("请输入您的名字: ");
+                            String name = scanner.nextLine();
+                            addteacher.setTeacher(id,name);
+                            teacherService.add(addteacher);
+                            break;
+                        case 1:
+                            System.out.println("请输入该老师的ID: ");
+                            Teacher teacher = teacherService.show(scanner.nextLong());
+                            if(teacher == null)
+                                System.out.println("没有找到该ID老师的信息");
+                            else {
+                                System.out.println("该老师的ID为:" + teacher.getTeacherId() + "该老师的姓名为" + teacher.getTeacherName());
+                            }
+                            break;
+                        case 2:
+                            teacherService.getAll();
+                            break;
+                        case 3:
+                            Teacher changeteacher = new Teacher();
+                            System.out.println("请输入需要修改的老师的ID: ");
+                            long teacherID = scanner.nextLong();
+                            System.out.println("请输入要修改的老师的名字: ");
+                            String teacherName = scanner.nextLine();
+                            changeteacher.setTeacher(teacherID,teacherName);
+                            if(teacherService.change(changeteacher))
+                                System.out.println("修改成功!");
+                            else
+                                System.out.println("修改失败!");
+                            break;
+                        case 4:
+                            System.out.println("请输入需要删除的老师的ID: ");
+                            if(teacherService.delete(scanner.nextLong()))
+                               System.out.println("删除成功!");
+                            else
+                                System.out.println("删除失败!");
+                            break;
+                        default:
+                            break;
+                    }
+                /*case 2:
                     System.out.println("choise 0 : 对教务处人员进行操作");
                     System.out.println("choise 1 : 对教师进行操作");
                     System.out.println("chiose 2 : 对学生进行操作进行操作");

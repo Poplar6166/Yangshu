@@ -4,6 +4,7 @@ import jwxt.Student;
 import service.SuperStudent;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +14,23 @@ public class StudentService implements SuperStudent {
     String JDBC_PASSWORD = "root";
     @Override
     public List<Student> getAll() {
-
-        return null;
+        List<Student> result = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            try (Statement stmt = conn.createStatement()) {
+                try (ResultSet rs = stmt.executeQuery("SELECT stuID, stuName FROM Student")) {
+                    while (rs.next()) {
+                        long id = rs.getLong("stuID");
+                        String name = rs.getString("stuName");
+                        Student student = new Student();
+                        student.setStudnet(id, name);
+                        result.add(student);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
     }
     @Override
     public void add(Student student) {
@@ -77,20 +93,5 @@ public class StudentService implements SuperStudent {
     }
 
 
-    public void showStudent(){
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
-            try (Statement stmt = conn.createStatement()) {
-                try (ResultSet rs = stmt.executeQuery("SELECT stuID,stuName FROM Student ")) {
-                    while (rs.next()) {
-                        long id = rs.getLong(1); // 注意：索引从1开始
-                        String name = rs.getString(2);
-                        System.out.println("ID: " + id +  ",NAME: "+name);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
-    }
 }

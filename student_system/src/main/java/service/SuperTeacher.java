@@ -2,9 +2,12 @@ package service;
 
 import jwxt.Teacher;
 
+import java.util.List;
+
 public interface SuperTeacher {
-    Teacher show(String id);
+    List<Teacher> getAll();
+    Teacher show(long id);
     void add(Teacher teacher);
-    void delete(String id);
-    void change(Teacher teacher);
+    boolean delete(long id);
+    boolean change(Teacher teacher);
 }

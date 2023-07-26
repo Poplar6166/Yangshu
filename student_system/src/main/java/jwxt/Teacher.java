@@ -1,19 +1,16 @@
 package jwxt;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Teacher {
-    private String TeacherId;
+    private long TeacherId;
     private String TeacherName;
     private int TeacherAge;
     private String TeacherSex;
     private Date TeacherYear;
     private String TeacherPhone;
     private String TeacherBumen;
-    private void setInformation(String teacherid, String name, int age, String sex,
+    private void setInformation(long teacherid, String name, int age, String sex,
                                 Date year, String phone,String bumen){
         this.TeacherId = teacherid;
         this.TeacherName = name;
@@ -23,8 +20,11 @@ public class Teacher {
         this.TeacherPhone = phone;
         this.TeacherBumen = bumen;
     }
-
-    public String getTeacherId() {
+    public void setTeacher(long id,String name){
+        this.TeacherId = id;
+        this.TeacherName = name;
+    }
+    public long getTeacherId() {
         return TeacherId;
     }
 

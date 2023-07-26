@@ -34,6 +34,10 @@ public class Student {
     public Student() {
 
     }
+    public void setStudnet(long stuId,String stuName){
+        this.studentId = stuId;
+        this.studentName = stuName;
+    }
 
     public void setStudentId(long studentId) {
         this.studentId = studentId;

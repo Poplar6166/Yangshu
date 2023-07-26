@@ -6,20 +6,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 public class TeacherService implements SuperTeacher {
-    Map<String,Teacher> data = new HashMap<>();
+    Map<Long, Teacher> data = new HashMap<>();
     public List<Teacher> getAll(){
         return data.values().stream().toList();
     }
     public Teacher show(String id){
         return data.get(id);
     }
+
+    @Override
+    public Teacher show(long id) {
+        return null;
+    }
+
     public void add(Teacher teacher){
         data.put(teacher.getTeacherId(),teacher);
     }
-    public void delete(String id){
-        data.remove(id);
+    public boolean delete(long id){
+        return false;
     }
-    public void change(Teacher teacher){
-        data.put(teacher.getTeacherId(),teacher);
+    public boolean change(Teacher teacher){
+        return false;
     }
 }
