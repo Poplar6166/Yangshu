@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Manager {
-        private String managerId;
+        private long managerId;
         private String managerName;
         private int managerAge;
         private String managerSex;
         private Date managerYear;
         private String managerPhone;
-        private void setInformation(String managerid, String managername, int age, String sex, Date year,String phone){
+        private void setInformation(long managerid, String managername, int age, String sex, Date year,String phone){
                 this.managerId = managerid;
                 this.managerName = managername;
                 this.managerAge = age;
@@ -20,7 +20,11 @@ public class Manager {
                 this.managerYear = year;
                 this.managerPhone = phone;
         }
-        public String getManagerId(){
+        public void setManager(long id ,String name){
+                this.managerId = id;
+                this.managerName = name;
+        }
+        public long getManagerId(){
                 return this.managerId;
         }
         public String getManagerName(){

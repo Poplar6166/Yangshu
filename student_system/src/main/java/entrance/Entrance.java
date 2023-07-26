@@ -1,7 +1,9 @@
 package entrance;
 import jwxt.*;
+import service.SuperManager;
 import service.SuperStudent;
 import service.SuperTeacher;
+import service.mysql.ManagerService;
 import service.mysql.StudentService;
 import service.mysql.TeacherService;
 
@@ -16,6 +18,7 @@ public class Entrance {
         Scanner scanner = new Scanner(System.in);
         SuperStudent studentService = new StudentService();
         SuperTeacher teacherService = new TeacherService();
+        SuperManager managerService = new ManagerService();
 
 
         while(true) {
@@ -44,7 +47,6 @@ public class Entrance {
                             System.out.println("请输入姓名: ");
                             student.setStudentName(scanner.next());
                             studentService.add(student);
-                            System.out.println("添加成功！");
                             break;
                         /*System.out.println("请输入年龄: ");
                         int age = scanner.nextInt();
@@ -123,7 +125,7 @@ public class Entrance {
                     switch (scanner.nextInt()){
                         case 0:
                             Teacher addteacher = new Teacher();
-                            System.out.println("请输入您的ID: ");
+                            System.out.println("请输入您要添加的ID: ");
                             long id = scanner.nextLong();
                             scanner.nextLine();
                             System.out.println("请输入您的名字: ");
@@ -133,7 +135,7 @@ public class Entrance {
                             break;
                         case 1:
                             System.out.println("请输入该老师的ID: ");
-                            Teacher teacher = teacherService.show(scanner.nextLong());
+                            Teacher teacher = teacherService.findTeacher(scanner.nextLong());
                             if(teacher == null)
                                 System.out.println("没有找到该ID老师的信息");
                             else {
@@ -163,20 +165,76 @@ public class Entrance {
                             if(teacherService.delete(scanner.nextLong()))
                                System.out.println("删除成功!");
                             else
-                                System.out.println("删除失败!");
+                                System.out.println("查无此人!");
                             break;
                         default:
                             break;
                     }
-                /*case 2:
-                    System.out.println("choise 0 : 对教务处人员进行操作");
+                case 3:
+                    System.out.println("choise 0 : add your information");
+                    System.out.println("choise 1 : find your information");
+                    System.out.println("choise 2 : show all information");
+                    System.out.println("choise 3 : change your information");
+                    System.out.println("choise 4 : delete your information");
+                    System.out.println("choise other : Go back");
+
+                    switch (scanner.nextInt()){
+                        case 0:
+                            Manager addmanager = new Manager();
+                            System.out.println("请输入您要添加的ID: ");
+                            long id = scanner.nextLong();
+                            scanner.nextLine();
+                            System.out.println("请输入您要添加的姓名: ");
+                            String name = scanner.nextLine();
+                            addmanager.setManager(id,name);
+                            managerService.add(addmanager);
+                            break;
+                        case 1:
+                            System.out.println("请输入您要查询的ID: ");
+                            Manager findmanager = managerService.findManager(scanner.nextLong());
+                            if(findmanager == null)
+                                System.out.println("没有找到该ID的管理人员");
+                            else
+                                System.out.println("该管理人员的ID为: " + findmanager.getManagerId() + " ,该管理人员的姓名为: " + findmanager.getManagerName());
+                            break;
+                        case 2:
+                            List<Manager> showmanager= managerService.getAll();
+                            for(Manager managers : showmanager){
+                                System.out.println("该管理人员的ID为: " + managers.getManagerId() + " ,该管理人员的姓名为: " + managers.getManagerName());
+                            }
+                            break;
+                        case 3:
+                            Manager manager = new Manager();
+                            System.out.println("请输入您需要修改的管理人员的ID: ");
+                            long managerID = scanner.nextLong();
+                            scanner.nextLine();
+                            String managerName = scanner.nextLine();
+                            manager.setManager(managerID,managerName);
+                            if(managerService.change(manager))
+                                System.out.println("修改成功!");
+                            else
+                                System.out.println("修改失败!");
+                            break;
+                        case 4:
+                            System.out.println("请输入您需要删除的管理人员的ID: ");
+                            if(managerService.delete(scanner.nextLong()))
+                                System.out.println("删除成功!");
+                            else
+                                System.out.println("查无此人!");
+
+                    }
+
+                    /*System.out.println("choise 0 : ");
                     System.out.println("choise 1 : 对教师进行操作");
-                    System.out.println("chiose 2 : 对学生进行操作进行操作");
+                    System.out.println("choise 2 : 对学生进行操作进行操作");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
                         case 0:
                             System.out.println("choise 0 : add your information");
-                            System.out.println("choise 1 : show your information");
+                            System.out.println("choise 1 : find your information");
+                            System.out.println("choise 2 : show all information");
+                            System.out.println("choise 3 : change your information");
+                            System.out.println("choise 4 : delete your information");
                             System.out.println("请输入你需要的操作 : ");
                     }
 

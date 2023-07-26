@@ -33,7 +33,7 @@ public class TeacherService implements SuperTeacher {
     }
 
     @Override
-    public Teacher show(long id) {
+    public Teacher findTeacher(long id) {
         Teacher teacher = new Teacher();
         try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
             try(PreparedStatement ps = coon.prepareStatement("SELECT teacherID,teacherName FROM Teacher WHERE teacherID = ?")){
@@ -41,7 +41,7 @@ public class TeacherService implements SuperTeacher {
                 int n = ps.executeUpdate();
                 if(n > 0) {
                     ResultSet rs = ps.executeQuery();
-                    teacher.setTeacher(rs.getLong(1), rs.getString(2));
+                    teacher.setTeacher(rs.getLong("teacherID"), rs.getString("teacherName"));
                     return teacher;
                 }
             }

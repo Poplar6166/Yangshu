@@ -15,7 +15,7 @@ public class TeacherService implements SuperTeacher {
     }
 
     @Override
-    public Teacher show(long id) {
+    public Teacher findTeacher(long id) {
         return null;
     }
 

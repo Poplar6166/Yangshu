@@ -2,13 +2,17 @@ package service;
 
 import jwxt.Manager;
 
-public interface SuperManager {
-    Manager show(String id);
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+public interface SuperManager {
+    List<Manager> getAll();
+    Manager findManager(long id);
     void add(Manager manager);
 
-    void delete(String id);
+    boolean delete(long id);
 
-    void change(Manager manager);
+    boolean change(Manager manager);
 
 }

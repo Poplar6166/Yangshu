@@ -39,6 +39,10 @@ public class StudentService implements SuperStudent {
                 ps.setObject(1,student.getStudentId());
                 ps.setObject(2,student.getStudentName());
                 int n = ps.executeUpdate();
+                if(n > 0)
+                    System.out.println("添加成功!");
+                else
+                    System.out.println("添加失败!");
             }
         }catch (SQLException e) {
             throw new RuntimeException(e);
