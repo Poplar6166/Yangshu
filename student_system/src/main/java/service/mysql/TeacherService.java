@@ -17,11 +17,13 @@ public class TeacherService implements SuperTeacher {
     try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
         try (Statement stmt = coon.createStatement()){
             try (ResultSet rs = stmt.executeQuery("SELECT teacherID,teacherName FROM Teacher")){
-                Teacher teacher = new Teacher();
-                long id = teacher.getTeacherId();
-                String name = teacher.getTeacherName();
-                teacher.setTeacher(id,name);
-                result.add(teacher);
+                while(rs.next()) {
+                    Teacher teacher = new Teacher();
+                    long id = rs.getLong("teacherID");
+                    String name = rs.getString("teacherName");
+                    teacher.setTeacher(id, name);
+                    result.add(teacher);
+                }
             }
         }
     } catch (SQLException e) {

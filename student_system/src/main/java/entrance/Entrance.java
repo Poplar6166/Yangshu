@@ -23,8 +23,8 @@ public class Entrance {
             System.out.println("\uD83D\uDE0E" + "There are several options here :");
             System.out.println("choise 0 : Leave system");
             System.out.println("choise 1 : Student end");
-            System.out.println("choise 2 : Manager end");
-            System.out.println("choise 3 : Teacher end");
+            System.out.println("choise 2 : Teacher end");
+            System.out.println("choise 3 : Manager end");
             System.out.println("\uD83E\uDD14" + "please input your choise : ");
             int choise = scanner.nextInt();
             switch (choise){
@@ -34,6 +34,7 @@ public class Entrance {
                     System.out.println("choise 2 : change your information");
                     System.out.println("choise 3 : delete your information");
                     System.out.println("choise 4 : show your information");
+                    System.out.println("choise other : Go back");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
                         case 0 :
@@ -72,8 +73,10 @@ public class Entrance {
                         String bandaoshi = scanner.next();
                         */
                         case 1 :
-                            StudentService studentshow = new StudentService();
-                            studentshow.showStudent();
+                            List<Student> studentshow = studentService.getAll();
+                            for (Student students : studentshow) {
+                                System.out.println("该学生的ID为: " + students.getStudentId() + " ,该学生的学号为: " + students.getStudentName());
+                            }
                             break;
                         case 2:
                             Student student1 = new Student();
@@ -115,12 +118,14 @@ public class Entrance {
                     System.out.println("choise 2 : show all information");
                     System.out.println("choise 3 : change your information");
                     System.out.println("choise 4 : delete your information");
+                    System.out.println("choise other : Go back");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
                         case 0:
                             Teacher addteacher = new Teacher();
                             System.out.println("请输入您的ID: ");
                             long id = scanner.nextLong();
+                            scanner.nextLine();
                             System.out.println("请输入您的名字: ");
                             String name = scanner.nextLine();
                             addteacher.setTeacher(id,name);
@@ -136,7 +141,10 @@ public class Entrance {
                             }
                             break;
                         case 2:
-                            teacherService.getAll();
+                            List<Teacher> teachershow = teacherService.getAll();
+                            for(Teacher teachers : teachershow){
+                                System.out.println("该老师的ID为: " + teachers.getTeacherId() + " ,该老师的名字为: " + teachers.getTeacherName());
+                            }
                             break;
                         case 3:
                             Teacher changeteacher = new Teacher();
