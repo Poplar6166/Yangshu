@@ -2,10 +2,9 @@ package service;
 
 import jwxt.Student;
 
-import java.util.Date;
 import java.util.List;
 
-public interface SuperStudent {
+public interface SuperStudentsql {
 
     List<Student> getAll();
 

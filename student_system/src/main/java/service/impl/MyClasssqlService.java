@@ -1,13 +1,13 @@
 package service.impl;
 
 import jwxt.MyClass;
-import service.SuperMyClass;
+import service.SuperMyClasssql;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MyClassService implements SuperMyClass {
+public class MyClasssqlService implements SuperMyClasssql {
     Map<String, MyClass> data = new HashMap<>();
     public List<MyClass> getAll(){
         return data.values().stream().toList();

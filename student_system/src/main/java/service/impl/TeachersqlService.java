@@ -1,11 +1,11 @@
 package service.impl;
 import jwxt.Teacher;
-import service.SuperTeacher;
+import service.SuperTeachersql;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-public class TeacherService implements SuperTeacher {
+public class TeachersqlService implements SuperTeachersql {
     Map<Long, Teacher> data = new HashMap<>();
     public List<Teacher> getAll(){
         return data.values().stream().toList();

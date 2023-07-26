@@ -1,15 +1,14 @@
 package service.impl;
 
 import jwxt.Student;
-import service.SuperStudent;
+import service.SuperStudentsql;
 
-import java.sql.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StudentService implements SuperStudent {
+public class StudentsqlService implements SuperStudentsql {
     Map<Long, Student> data = new HashMap<>();
     public List<Student> getAll(){
         return data.values().stream().toList();

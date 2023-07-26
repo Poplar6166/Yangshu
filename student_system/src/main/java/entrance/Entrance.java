@@ -1,24 +1,22 @@
 package entrance;
 import jwxt.*;
-import service.SuperManager;
-import service.SuperStudent;
-import service.SuperTeacher;
-import service.mysql.ManagerService;
-import service.mysql.StudentService;
-import service.mysql.TeacherService;
+import service.SuperManagersql;
+import service.SuperStudentsql;
+import service.SuperTeachersql;
+import service.mysql.ManagersqlService;
+import service.mysql.StudentsqlService;
+import service.mysql.TeachersqlService;
 
-import java.sql.*;
 import java.util.List;
-import java.util.*;
 import java.util.Scanner;
 
 public class Entrance {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        SuperStudent studentService = new StudentService();
-        SuperTeacher teacherService = new TeacherService();
-        SuperManager managerService = new ManagerService();
+        SuperStudentsql studentService = new StudentsqlService();
+        SuperTeachersql teacherService = new TeachersqlService();
+        SuperManagersql managerService = new ManagersqlService();
 
 
         while(true) {
@@ -32,6 +30,16 @@ public class Entrance {
             int choise = scanner.nextInt();
             switch (choise){
                 case 1:
+                    /*Student Student = new Student();
+                    System.out.println("请输入您的学号: ");
+                    long id = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.println("请输入您的密码: ");
+                    long password = scanner.nextLong();
+                    if(studentService.findStudent(id,password) == null){
+                        System.out.println("学生账号或密码不存在");
+                        break;
+                    }*/
                     System.out.println("choise 0 : add your information");
                     System.out.println("choise 1 : print all students information");
                     System.out.println("choise 2 : change your information");

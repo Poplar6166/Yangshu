@@ -1,13 +1,13 @@
 package service.mysql;
 import jwxt.Teacher;
-import service.SuperTeacher;
+import service.SuperTeachersql;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-public class TeacherService implements SuperTeacher {
+public class TeachersqlService implements SuperTeachersql {
     String JDBC_URL = "jdbc:mysql://localhost:3306/test";
     String JDBC_USER = "root";
     String JDBC_PASSWORD = "root";

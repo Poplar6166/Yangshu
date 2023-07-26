@@ -1,13 +1,13 @@
 package service.impl;
 
 import jwxt.Manager;
-import service.SuperManager;
+import service.SuperManagersql;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ManagerServiceImpl implements SuperManager {
+public class ManagersqlServiceImpl implements SuperManagersql {
     Map<Long, Manager> data = new HashMap<>();
     public List<Manager> getAll(){
         return data.values().stream().toList();

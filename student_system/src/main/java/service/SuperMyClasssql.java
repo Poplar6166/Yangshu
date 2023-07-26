@@ -2,7 +2,7 @@ package service;
 
 import jwxt.MyClass;
 
-public interface SuperMyClass {
+public interface SuperMyClasssql {
     MyClass show(String ClassId);
 
     void add(MyClass myClass);

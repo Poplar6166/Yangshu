@@ -4,7 +4,7 @@ import jwxt.Teacher;
 
 import java.util.List;
 
-public interface SuperTeacher {
+public interface SuperTeachersql {
     List<Teacher> getAll();
     Teacher findTeacher(long id);
     void add(Teacher teacher);
