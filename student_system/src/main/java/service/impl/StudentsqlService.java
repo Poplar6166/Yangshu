@@ -10,44 +10,48 @@ import java.util.Map;
 
 public class StudentsqlService implements SuperStudentsql {
     Map<Long, Student> data = new HashMap<>();
+    public List<Student> getGrade(){
+        return null;
+    }
+    public boolean changeStudent(String password,long id){
+        return false;
+    }
     public List<Student> getAll(){
         return data.values().stream().toList();
     }
-    public Student show(long stuId){
-        return data.get(stuId);
+    public Student show(long stuID){
+        return data.get(stuID);
     }
     public void add(Student student){
-        data.put(student.getStudentId(),student);
+        data.put(student.getStuID(),student);
     }
 
     @Override
-    public boolean studentdelete(long studentId) {
+    public boolean studentdelete(long stuID) {
         return false;
     }
 
-    @Override
-    public boolean changeStudent(Student student) {
-        return false;
-    }
 
-    @Override
-    public String findStudent(long studentId) {
+    public String findStudent(long stuID) {
         return null;
     }
 
-    public boolean delete(long stuId){
-        if(data.remove(stuId) == null){
+    public boolean delete(long stuID){
+        if(data.remove(stuID) == null){
             return false;
         }
         else
             return true;
     }
     public void change(Student student){
-        data.put(student.getStudentId(),student);
+        data.put(student.getStuID(),student);
     }
-    public void addStudent(long studentId, String name, int age, String sex,Date year,
+    public void addStudent(long stuID, String name, int age, String sex,Date year,
                            String phone,String bumen,String sushe,String banji,String bandaoshi) {
-        Student student = new Student(studentId, name, age, sex,year,phone,bumen,sushe,banji,bandaoshi);
+        Student student = new Student(stuID, name, age, sex,year,phone,bumen,sushe,banji,bandaoshi);
         add(student);
+    }
+    public boolean login(long stuID,String password){
+        return false;
     }
 }

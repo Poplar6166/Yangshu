@@ -7,7 +7,11 @@ public class Teacher {
     private String TeacherName;
     private int TeacherAge;
     private String TeacherSex;
+    private long studentID;
+    private String studentName;
+    private String studentClass;
     private Date TeacherYear;
+    private String TeacherPassword;
     private String TeacherPhone;
     private String TeacherBumen;
     private void setInformation(long teacherid, String name, int age, String sex,
@@ -24,6 +28,22 @@ public class Teacher {
         this.TeacherId = id;
         this.TeacherName = name;
     }
+    public void loginTeacher(long tcID , String tcpassword){
+        this.TeacherId = tcID;
+        this.TeacherPassword = tcpassword;
+    }
+    public void setStudent(long stuID,String stuName,String stuClass) {
+        this.studentID = stuID;
+        this.studentName = stuName;
+        this.studentClass = stuClass;
+    }
+    public void changepassword(String teacherPassword){
+        this.TeacherPassword = teacherPassword;
+    }
+    public String getTeacherPassword() {
+        return TeacherPassword;
+    }
+
     public long getTeacherId() {
         return TeacherId;
     }

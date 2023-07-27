@@ -14,8 +14,10 @@ public class Student {
     private String studentSushe;
     private String studentBanji;
     private String studentBandaoshi;
-
-
+    private String studentPassword;
+    private long csID;
+    private long stuGrade;
+    private String studentClass;
 
     public Student(long studentId, String name, int age, String sex, Date year,
                    String phone, String bumen, String sushe, String banji, String bandaoshi){
@@ -34,28 +36,54 @@ public class Student {
     public Student() {
 
     }
-    public void setStudnet(long stuId,String stuName){
-        this.studentId = stuId;
+    public void setStudnet(long stuID,String stuPassword,String stuClass){
+        this.studentId = stuID;
+        this.studentPassword = stuPassword;
+        this.studentClass = stuClass;
+    }
+    public void changepassword(String studentPassword){
+        this.studentPassword = studentPassword;
+    }
+    public void loginStudent(long stuID,String studentPassword){
+        this.studentId = stuID;
+        this.studentPassword = studentPassword;
+    }
+    public void setGrade(long csID,long stuGrade){
+        this.csID = csID;
+        this.stuGrade = stuGrade;
+    }
+
+    public long getcsID() {
+        return csID;
+    }
+    public String getstuClass(){
+        return studentClass;
+    }
+
+    public long getStuGrade() {
+        return stuGrade;
+    }
+
+    public String getStudentPassword(){
+        return studentPassword;
+    }
+    public void setStudentId(long stuID) {
+        this.studentId = stuID;
+    }
+
+    public void setStudentName(String stuName) {
         this.studentName = stuName;
     }
 
-    public void setStudentId(long studentId) {
-        this.studentId = studentId;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public long getStudentId() {
+    public long getStuID() {
         return studentId;
     }
 
-    public String getStudentName() {
+    public String getStuName() {
         return studentName;
     }
 
-    public int getStudentAge() {
+    /*public int getStudentAge() {
         return studentAge;
     }
 
@@ -91,6 +119,7 @@ public class Student {
     public String toString() {
         return studentId + studentName;
     }
+    */
     /*
     ArrayList<String> StudentIdList = new ArrayList<>();
     ArrayList<String> StudentNameList = new ArrayList<>();

@@ -30,162 +30,115 @@ public class Entrance {
             int choise = scanner.nextInt();
             switch (choise){
                 case 1:
-                    /*Student Student = new Student();
-                    System.out.println("请输入您的学号: ");
-                    long id = scanner.nextLong();
+                    Student stulogin = new Student();
+                    System.out.println("请输入您的账号(学号) : ");
+                    long stuid = scanner.nextLong();
                     scanner.nextLine();
-                    System.out.println("请输入您的密码: ");
-                    long password = scanner.nextLong();
-                    if(studentService.findStudent(id,password) == null){
-                        System.out.println("学生账号或密码不存在");
+                    System.out.println("请输入您的密码(初始密码为123456) : ");
+                    String stupassword = scanner.nextLine();
+                    stulogin.loginStudent(stuid,stupassword);
+                    if(studentService.login(stulogin.getStuID(), stulogin.getStudentPassword())){
+                        System.out.println("登录成功,请继续操作: ");
+                    }else {
+                        System.out.println("账号或密码输入不正确,请重新输入: ");
                         break;
-                    }*/
-                    System.out.println("choise 0 : add your information");
-                    System.out.println("choise 1 : print all students information");
-                    System.out.println("choise 2 : change your information");
-                    System.out.println("choise 3 : delete your information");
-                    System.out.println("choise 4 : show your information");
-                    System.out.println("choise other : Go back");
+                    }
+                    System.out.println("选项 0 : 查看你的成绩");
+                    System.out.println("选项 1 : 查看你的信息");
+                    System.out.println("选项 2 : 修改你的密码");
+                    System.out.println("其他选项 : 退出系统");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
                         case 0 :
-                            final Student student = new Student();
-                            System.out.println("请输入学生ID: ");
-                            student.setStudentId(scanner.nextInt());
-                            System.out.println("请输入姓名: ");
-                            student.setStudentName(scanner.next());
-                            studentService.add(student);
+                            List<Student> studentgrade = studentService.getGrade();
+                            for(Student studentGrade : studentgrade)
+                                System.out.println("课程号为 " + studentGrade.getcsID() + " ,成绩为: " + studentGrade.getStuGrade());
                             break;
-                        /*System.out.println("请输入年龄: ");
-                        int age = scanner.nextInt();
-                        System.out.println("请输入性别: ");
-                        String sex = scanner.next();
-                        System.out.println("请输入入学日期（格式为yyyy-MM-dd）: ");
-                        Date year = null;
-                        String dateString = scanner.nextLine();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        try {
-                            year = dateFormat.parse(dateString);
-                            System.out.println("日期是： " + year);
-                        } catch (ParseException e) {
-                            System.out.println("日期格式不正确");
-                        }
-
-                        System.out.println("请输入电话号码: ");
-                        String phone = scanner.next();
-                        System.out.println("请输入所属部门: ");
-                        String bumen = scanner.next();
-                        System.out.println("请输入宿舍号: ");
-                        String sushe = scanner.next();
-                        System.out.println("请输入班级: ");
-                        String banji = scanner.next();
-                        System.out.println("请输入班导师: ");
-                        String bandaoshi = scanner.next();
-                        */
                         case 1 :
-                            List<Student> studentshow = studentService.getAll();
-                            for (Student students : studentshow) {
-                                System.out.println("该学生的ID为: " + students.getStudentId() + " ,该学生的学号为: " + students.getStudentName());
-                            }
+                            String studentinformation = studentService.findStudent(stuid);
+                            System.out.println(studentinformation);
                             break;
                         case 2:
-                            Student student1 = new Student();
-                            System.out.println("请输入要修改的学生ID: ");
-                            student1.setStudentId(scanner.nextInt());
-                            System.out.println("请输入要修改的姓名: ");
-                            student1.setStudentName(scanner.next());
-                            if(studentService.changeStudent(student1)){
-                                System.out.println("修改成功");//修改后的结果
-                            }else {
-                                System.out.println("ID不正确!");
-                            }
-
-                            break;
-                        case 3:
-                            Student student2 = new Student();
-                            System.out.println("请输入要删除的学生ID");
-                            student2.setStudentId(scanner.nextLong());//是否删除成功
-                            if(studentService.studentdelete(student2.getStudentId())){
-                                System.out.println("删除成功！");
-                            }else {
-                                System.out.println("查无此人!");
-                            }
-                            break;
-                        case 4:
-                            Student student3 = new Student();
-                            System.out.println("请输入要显示的学生ID");
-                            student3.setStudentId(scanner.nextLong());
-                            String s = studentService.findStudent(student3.getStudentId());
-                            System.out.println(s);
+                            Student student = new Student();
+                            System.out.println("请输入你新的密码");
+                            studentService.changeStudent(scanner.nextLine(), stuid);
                             break;
                         default:
-                            break;
+                            return;
                     }
 
                 case 2:
-                    System.out.println("choise 0 : add your information");
-                    System.out.println("choise 1 : find your information");
-                    System.out.println("choise 2 : show all information");
-                    System.out.println("choise 3 : change your information");
-                    System.out.println("choise 4 : delete your information");
-                    System.out.println("choise other : Go back");
+                    Teacher tclogin = new Teacher();
+                    System.out.println("请输入您的账号(教师编号) : ");
+                    long tcid = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.println("请输入您的密码(初始密码为123456) : ");
+                    String tcpassword = scanner.nextLine();
+                    tclogin.loginTeacher(tcid,tcpassword);
+                    if(teacherService.login(tclogin.getTeacherId(), tclogin.getTeacherPassword())){
+                        System.out.println("登录成功,请继续操作: ");
+                    }else {
+                        System.out.println("账号或密码输入不正确,请重新输入: ");
+                        break;
+                    }
+                    System.out.println("选项 0 : 查看您的信息");
+                    System.out.println("选项 1 : 查看您的学生信息");
+                    System.out.println("选项 2 : 添加学生的成绩");
+                    System.out.println("选项 3 : 修改密码");
+                    System.out.println("其他选项 : 退出系统");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
                         case 0:
-                            Teacher addteacher = new Teacher();
-                            System.out.println("请输入您要添加的ID: ");
-                            long id = scanner.nextLong();
-                            scanner.nextLine();
-                            System.out.println("请输入您的名字: ");
-                            String name = scanner.nextLine();
-                            addteacher.setTeacher(id,name);
-                            teacherService.add(addteacher);
+                            Teacher teacherinformation = teacherService.findTeacher(tcid);
+                            System.out.println(teacherinformation);
                             break;
                         case 1:
-                            System.out.println("请输入该老师的ID: ");
-                            Teacher teacher = teacherService.findTeacher(scanner.nextLong());
-                            if(teacher == null)
-                                System.out.println("没有找到该ID老师的信息");
-                            else {
-                                System.out.println("该老师的ID为:" + teacher.getTeacherId() + "该老师的姓名为" + teacher.getTeacherName());
+                            List<Teacher> student = teacherService.getStudent(tcid);
+                            for(Teacher students : student){
+                                System.out.println(students);
                             }
                             break;
                         case 2:
-                            List<Teacher> teachershow = teacherService.getAll();
-                            for(Teacher teachers : teachershow){
-                                System.out.println("该老师的ID为: " + teachers.getTeacherId() + " ,该老师的名字为: " + teachers.getTeacherName());
+                            System.out.println("请输入您需要添加的学生的学号: ");
+                            long stuID = scanner.nextLong();
+                            scanner.nextLine();
+                            System.out.println("请输入他的成绩(请手下留情!)");
+                            long stugrade = scanner.nextLong();
+                            if(teacherService.setStudentGrade(stuID,stugrade)){
+                                System.out.println("添加成功!");
+                            }else {
+                                System.out.println("添加失败,请确认是否正确输入学号");
                             }
                             break;
                         case 3:
-                            Teacher changeteacher = new Teacher();
-                            System.out.println("请输入需要修改的老师的ID: ");
-                            long teacherID = scanner.nextLong();
-                            System.out.println("请输入要修改的老师的名字: ");
-                            String teacherName = scanner.nextLine();
-                            changeteacher.setTeacher(teacherID,teacherName);
-                            if(teacherService.change(changeteacher))
-                                System.out.println("修改成功!");
-                            else
-                                System.out.println("修改失败!");
-                            break;
-                        case 4:
-                            System.out.println("请输入需要删除的老师的ID: ");
-                            if(teacherService.delete(scanner.nextLong()))
-                               System.out.println("删除成功!");
-                            else
-                                System.out.println("查无此人!");
+                            Teacher teacher = new Teacher();
+                            System.out.println("请输入你新的密码");
+                            teacherService.changeTeacher(scanner.nextLine(),tcid);
                             break;
                         default:
-                            break;
+                            return;
                     }
                 case 3:
-                    System.out.println("choise 0 : add your information");
-                    System.out.println("choise 1 : find your information");
-                    System.out.println("choise 2 : show all information");
-                    System.out.println("choise 3 : change your information");
-                    System.out.println("choise 4 : delete your information");
-                    System.out.println("choise other : Go back");
-
+                    Manager mglogin = new Manager();
+                    System.out.println("请输入您的账号(管理员编号) : ");
+                    long mgid = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.println("请输入您的密码(初始密码为123456) : ");
+                    String mgpassword = scanner.nextLine();
+                    mglogin.loginManager(mgid,mgpassword);
+                    if(teacherService.login(mglogin.getTeacherId(), tclogin.getTeacherPassword())){
+                        System.out.println("登录成功,请继续操作: ");
+                    }else {
+                        System.out.println("账号或密码输入不正确,请重新输入: ");
+                        break;
+                    }
+                    System.out.println("选项 0 : 修改学生信息(增删改查)");
+                    System.out.println("选项 1 : 修改老师信息(增删改查)");
+                    System.out.println("选项 2 : 查看您的信息");
+                    System.out.println("选项 3 : 修改您的密码");
+                    System.out.println("选项 4 : 修改课程信息(增删改查)");
+                    System.out.println("其他选项 : 退出系统");
+                    System.out.println("请输入您的选择 : ");
                     switch (scanner.nextInt()){
                         case 0:
                             Manager addmanager = new Manager();
