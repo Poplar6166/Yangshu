@@ -98,7 +98,7 @@ public class ManagersqlService implements SuperManagersql {
     }
     public boolean login(long mgID,String mgPassword){
         try(Connection coon = JDBCTemplate.getInstance()){
-            try(PreparedStatement ps = coon.prepareStatement("SELECT mgID,mgpassword FROM Manager WHERE mgID = ? and mgassword = ?")){
+            try(PreparedStatement ps = coon.prepareStatement("SELECT mgID,mgpassword FROM Manager WHERE mgID = ? and mgpassword = ?")){
                 ps.setObject(1,mgID);
                 ps.setObject(2,mgPassword);
                 try (ResultSet rs = ps.executeQuery()) {
