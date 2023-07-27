@@ -3,23 +3,28 @@ package jwxt;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MyClass {
-    private String classId;
+    private Long classId;
     private String className;
     private String sc;
-    private String studentId;
-    private String teacherId;
-    private void setInformation(String classId,String className,String sc,String studentId,String teacherId){
+    private Long studentId;
+    private Long teacherId;
+    private void setInformation(Long classId,String className,String sc,Long studentId,Long teacherId){
         this.classId = classId;
         this.className = className;
         this.sc = sc;
         this.studentId = studentId;
         this.teacherId = teacherId;
     }
-
-    public String getClassId() {
+    public void setClass(Long csID,String csName, Long tcID){
+        this.classId = csID;
+        this.className = csName;
+        this.teacherId = tcID;
+    }
+    public Long getClassId() {
         return classId;
     }
 
@@ -31,11 +36,11 @@ public class MyClass {
         return sc;
     }
 
-    public String getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public String getTeacherId() {
+    public Long getTeacherId() {
         return teacherId;
     }
     /*ArrayList<String> ClassIdList = new ArrayList<>();

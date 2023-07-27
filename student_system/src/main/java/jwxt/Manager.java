@@ -12,6 +12,8 @@ public class Manager {
         private String managerSex;
         private Date managerYear;
         private String managerPhone;
+        private String managerPassword;
+
         private void setInformation(long managerid, String managername, int age, String sex, Date year,String phone){
                 this.managerId = managerid;
                 this.managerName = managername;
@@ -24,6 +26,15 @@ public class Manager {
                 this.managerId = id;
                 this.managerName = name;
         }
+        public void loginManager(long id ,String password){
+                this.managerId = id;
+                this.managerPassword = password;
+        }
+
+        public String getManagerPassword() {
+                return managerPassword;
+        }
+
         public long getManagerId(){
                 return this.managerId;
         }

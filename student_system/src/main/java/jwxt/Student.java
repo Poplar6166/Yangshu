@@ -36,9 +36,9 @@ public class Student {
     public Student() {
 
     }
-    public void setStudnet(long stuID,String stuPassword,String stuClass){
+    public void setStudnet(long stuID,String stuName,String stuClass){
         this.studentId = stuID;
-        this.studentPassword = stuPassword;
+        this.studentPassword = stuName;
         this.studentClass = stuClass;
     }
     public void changepassword(String studentPassword){

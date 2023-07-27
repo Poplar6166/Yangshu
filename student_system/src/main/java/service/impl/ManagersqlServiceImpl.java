@@ -13,8 +13,8 @@ public class ManagersqlServiceImpl implements SuperManagersql {
         return data.values().stream().toList();
     }
 
-    public Manager findManager(long id) {
-        return data.get(id);
+    public String findManager(long id) {
+        return null;
     }
 
     public void add(Manager manager) {
@@ -26,6 +26,12 @@ public class ManagersqlServiceImpl implements SuperManagersql {
     }
 
     public boolean change(Manager manager) {
+        return false;
+    }
+    public boolean login(long mgID,String mgPassword){
+        return false;
+    }
+    public boolean changeManager(String password,long id){
         return false;
     }
 }

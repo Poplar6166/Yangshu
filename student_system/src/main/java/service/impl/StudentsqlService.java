@@ -54,4 +54,7 @@ public class StudentsqlService implements SuperStudentsql {
     public boolean login(long stuID,String password){
         return false;
     }
+    public boolean changeStudentInformation(long stuID,String stuName,String stuClass){
+        return false;
+    }
 }

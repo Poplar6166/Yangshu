@@ -36,9 +36,10 @@ public class StudentsqlService implements SuperStudentsql {
     @Override
     public void add(Student student) {
         try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
-            try(PreparedStatement ps = coon.prepareStatement("INSERT INTO Student VALUES (?,?)")){
+            try(PreparedStatement ps = coon.prepareStatement("INSERT INTO Student(stuID,stuName,stuClass) VALUES (?,?,?)")){
                 ps.setObject(1,student.getcsID());
                 ps.setObject(2,student.getStuName());
+                ps.setObject(3,student.getstuClass());
                 int n = ps.executeUpdate();
                 if(n > 0)
                     System.out.println("添加成功!");
@@ -81,16 +82,32 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return false;
     }
+    public boolean changeStudentInformation(long stuID,String stuName,String stuClass){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("UPDATE Student SET stuPassword = '123456',stuName = ?,stuClass = ? WHERE stuID = ?")){
+                ps.setObject(1,stuName);
+                ps.setObject(2,stuClass);
+                ps.setObject(3,stuID);
+                int n = ps.executeUpdate();
+                if(n>0)
+                    return true;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
     public String findStudent(long stuID){
         try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
-            try(PreparedStatement ps = coon.prepareStatement("SELECT * FROM Student WHERE stuID = ?")){
+            try(PreparedStatement ps = coon.prepareStatement("SELECT stuID,stuName,stuClass FROM Student WHERE stuID = ?")){
                 ps.setObject(1,stuID);
                 ResultSet rs = ps.executeQuery();
                 int n = ps.executeUpdate();
                 if(n > 0)
                     System.out.println("找到学生信息：");
                 while(rs.next()) {
-                    return "学生ID：" + rs.getLong("stuID") + " 学生姓名：" + rs.getString("stuName");
+                    return "学生ID：" + rs.getLong("stuID") + " 学生姓名："
+                            + rs.getString("stuName") + " ,学生所在班级: " + rs.getString("stuClass");
                 }
             }
         }catch(SQLException e){

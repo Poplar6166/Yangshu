@@ -34,20 +34,19 @@ public class TeachersqlService implements SuperTeachersql {
         return result;
     }
 
-    @Override
-    public Teacher findTeacher(long id) {
-        Teacher teacher = new Teacher();
-        try(Connection coon = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD)){
-            try(PreparedStatement ps = coon.prepareStatement("SELECT teacherID,teacherName FROM Teacher WHERE teacherID = ?")){
-                ps.setObject(1,id);
+    public String findTeacher(long tcID){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("SELECT tcID,tcName FROM Teacher WHERE tcID = ?")){
+                ps.setObject(1,tcID);
+                ResultSet rs = ps.executeQuery();
                 int n = ps.executeUpdate();
-                if(n > 0) {
-                    ResultSet rs = ps.executeQuery();
-                    teacher.setTeacher(rs.getLong("teacherID"), rs.getString("teacherName"));
-                    return teacher;
+                if(n > 0)
+                while(rs.next()) {
+                    return "教师ID：" + rs.getLong("tcID") + " 教师姓名："
+                            + rs.getString("tcName");
                 }
             }
-        }catch (SQLException e){
+        }catch(SQLException e){
             throw new RuntimeException(e);
         }
         return null;
@@ -152,6 +151,20 @@ public class TeachersqlService implements SuperTeachersql {
             try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET tcpassword = ? WHERE stuID = ?")){
                 ps.setObject(1,password);
                 ps.setObject(2,id);
+                int n = ps.executeUpdate();
+                if(n>0)
+                    return true;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+    public boolean changeTeacherInformation(long tcID,String tcName){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET tcpassword = '123456',tcName = ? WHERE tcID = ?")){
+                ps.setObject(1,tcName);
+                ps.setObject(2,tcID);
                 int n = ps.executeUpdate();
                 if(n>0)
                     return true;

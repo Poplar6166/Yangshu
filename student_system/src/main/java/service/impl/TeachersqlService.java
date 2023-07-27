@@ -15,7 +15,7 @@ public class TeachersqlService implements SuperTeachersql {
     }
 
     @Override
-    public Teacher findTeacher(long id) {
+    public String findTeacher(long id) {
         return null;
     }
 
@@ -26,6 +26,21 @@ public class TeachersqlService implements SuperTeachersql {
         return false;
     }
     public boolean change(Teacher teacher){
+        return false;
+    }
+    public boolean changeTeacherInformation(long tcID,String tcName){
+        return false;
+    }
+    public List<Teacher> getStudent(long tcID){
+        return null;
+    }
+    public boolean login(long tcID,String tcpassword){
+        return false;
+    }
+    public boolean setStudentGrade(long stuID,long stuGrade){
+        return false;
+    }
+    public boolean changeTeacher(String tcpassword,long tcID){
         return false;
     }
 }

@@ -3,11 +3,11 @@ package service;
 import jwxt.MyClass;
 
 public interface SuperMyClasssql {
-    MyClass show(String ClassId);
+    MyClass show(Long ClassId);
 
     void add(MyClass myClass);
 
-    void delete(String Classid);
+    void delete(Long Classid);
 
     void change(MyClass myClass);
 }

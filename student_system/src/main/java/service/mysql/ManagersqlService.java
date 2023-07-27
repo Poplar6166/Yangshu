@@ -8,6 +8,7 @@ import util.JDBCTemplate;
 
 import javax.sql.DataSource;
 import javax.sql.rowset.JdbcRowSet;
+import java.security.Key;
 import java.sql.*;
 import java.util.*;
 import java.sql.Connection;
@@ -78,22 +79,50 @@ public class ManagersqlService implements SuperManagersql {
         return false;
     }
 
-    public Manager findManager(long id) {
-        Manager manager = new Manager();
-        try (Connection coon = JDBCTemplate.getInstance()) {
-            try (PreparedStatement ps = coon.prepareStatement("SELECT * FROM Manager WHERE managerID = ?")) {
-                ps.setObject(1, id);
+
+    public String findManager(long mgID){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("SELECT mgID,mgName FROM Manager WHERE mgID = ?")){
+                ps.setObject(1,mgID);
+                ResultSet rs = ps.executeQuery();
                 int n = ps.executeUpdate();
-                if (n > 0) {
-                    ResultSet rs = ps.executeQuery();
-                    manager.setManager(rs.getLong("managerID"), rs.getString("managerName"));
-                    return manager;
+                while(rs.next()) {
+                    return "您的ID: " + rs.getLong("mgID") + " 您的姓名: "
+                            + rs.getString("mgName");
                 }
             }
-        } catch (SQLException e) {
+        }catch(SQLException e){
             throw new RuntimeException(e);
         }
         return null;
+    }
+    public boolean login(long mgID,String mgPassword){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("SELECT mgID,mgpassword FROM Manager WHERE mgID = ? and mgassword = ?")){
+                ps.setObject(1,mgID);
+                ps.setObject(2,mgPassword);
+                int n = ps.executeUpdate();
+                if(n > 0)
+                    return true;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+    public boolean changeManager(String password,long id){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("UPDATE Manager SET mgpassword = ? WHERE mgID = ?")){
+                ps.setObject(1,password);
+                ps.setObject(2,id);
+                int n = ps.executeUpdate();
+                if(n>0)
+                    return true;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 
 }

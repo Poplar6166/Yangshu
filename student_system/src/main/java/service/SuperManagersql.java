@@ -6,11 +6,14 @@ import java.util.List;
 
 public interface SuperManagersql {
     List<Manager> getAll();
-    Manager findManager(long id);
+    String findManager(long id);
     void add(Manager manager);
 
     boolean delete(long id);
 
     boolean change(Manager manager);
+    boolean login(long mgID,String mgPassword);
+
+    boolean changeManager(String password,long id);
 
 }
