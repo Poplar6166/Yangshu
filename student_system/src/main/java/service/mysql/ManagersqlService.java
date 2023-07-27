@@ -101,9 +101,11 @@ public class ManagersqlService implements SuperManagersql {
             try(PreparedStatement ps = coon.prepareStatement("SELECT mgID,mgpassword FROM Manager WHERE mgID = ? and mgassword = ?")){
                 ps.setObject(1,mgID);
                 ps.setObject(2,mgPassword);
-                int n = ps.executeUpdate();
-                if(n > 0)
-                    return true;
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return true; // 如果结果集中有数据，则表示匹配成功，返回true
+                    }
+                }
             }
         }catch (SQLException e){
             throw new RuntimeException(e);

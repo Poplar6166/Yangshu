@@ -98,18 +98,20 @@ public class TeachersqlService implements SuperTeachersql {
 
     @Override
     public boolean login(long tcID, String tcpassword) {
-        try(Connection coon = JDBCTemplate.getInstance()){
-            try(PreparedStatement ps = coon.prepareStatement("SELECT tcID,tcpassword FROM Teacher WHERE tcID = ? and tcpassword = ?")){
-                ps.setObject(1,tcID);
-                ps.setObject(2,tcpassword);
-                int n = ps.executeUpdate();
-                if(n > 0)
-                    return true;
+        try (Connection coon = JDBCTemplate.getInstance()) {
+            try (PreparedStatement ps = coon.prepareStatement("SELECT tcID, tcpassword FROM Teacher WHERE tcID = ? and tcpassword = ?")) {
+                ps.setObject(1, tcID);
+                ps.setObject(2, tcpassword);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return true; // 如果结果集中有数据，则表示匹配成功，返回true
+                    }
+                }
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return false;
+        return false; // 如果没有匹配的记录，返回false
     }
 
     public List<Teacher> getStudent(long tcID) {
