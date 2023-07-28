@@ -22,13 +22,13 @@ public class Entrance {
         SuperMyClasssql myClassService = new MyClasssqlService();
 
         while(true) {
-            System.out.println("\uD83D\uDE18 " + "welcome to jwxt : ");
-            System.out.println("\uD83D\uDE0E" + "There are several options here :");
-            System.out.println("choise 0 : Leave system");
-            System.out.println("choise 1 : Student end");
-            System.out.println("choise 2 : Teacher end");
-            System.out.println("choise 3 : Manager end");
-            System.out.println("\uD83E\uDD14" + "please input your choise : ");
+            System.out.println("\uD83D\uDE18 " + "欢迎来到教务管理系统 : ");
+            System.out.println("\uD83D\uDE0E" + "以下是教务系统的各个端口 :");
+            System.out.println("choise 0 : 离开教务管理系统");
+            System.out.println("choise 1 : 学生端");
+            System.out.println("choise 2 : 教师端");
+            System.out.println("choise 3 : 教务处管理端");
+            System.out.println("\uD83E\uDD14" + "请选择你要进入的端口 : ");
             int choise = scanner.nextInt();
             switch (choise){
                 case 1:

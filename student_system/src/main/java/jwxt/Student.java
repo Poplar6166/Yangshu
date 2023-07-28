@@ -42,7 +42,7 @@ public class Student {
     }
     public void setStudnet(long stuID,String stuName,String stuClass){
         this.studentId = stuID;
-        this.studentPassword = stuName;
+        this.studentName = stuName;
         this.studentClass = stuClass;
     }
     public void changepassword(String studentPassword){
