@@ -1,7 +1,6 @@
 package service.mysql;
 
 import jwxt.Student;
-import jwxt.Teacher;
 import service.SuperStudentsql;
 import util.JDBCTemplate;
 

@@ -270,33 +270,6 @@ public class Entrance {
 
                     }
                     break;
-
-                    /*System.out.println("choise 0 : ");
-                    System.out.println("choise 1 : 对教师进行操作");
-                    System.out.println("choise 2 : 对学生进行操作进行操作");
-                    System.out.println("请输入你需要的操作 : ");
-                    switch (scanner.nextInt()){
-                        case 0:
-                            System.out.println("choise 0 : add your information");
-                            System.out.println("choise 1 : find your information");
-                            System.out.println("choise 2 : show all information");
-                            System.out.println("choise 3 : change your information");
-                            System.out.println("choise 4 : delete your information");
-                            System.out.println("请输入你需要的操作 : ");
-                    }
-
-                    System.out.println("choise 2 : show the student information");
-                    System.out.println("choise 3 : change the student information");
-                    System.out.println("choise 4 : delete the student information");
-                    System.out.println("choise 4 : show the teacher information");
-                    System.out.println("choise 5 : change the student information");
-                    System.out.println("choise 6 : delete the student information");
-                    System.out.println("choise 7 : show the class information");
-                    System.out.println("choise 8 : change the class information");
-                    System.out.println("choise 9 : delete the class information");
-                    System.out.println("choise - : delete the class information");
-                    System.out.println("请输入你需要的操作 : ");
-                    */
                 default:
                     break;
             }

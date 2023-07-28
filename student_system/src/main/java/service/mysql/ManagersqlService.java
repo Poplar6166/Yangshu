@@ -1,14 +1,7 @@
 package service.mysql;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import jwxt.Manager;
 import service.SuperManagersql;
 import util.JDBCTemplate;
-
-import javax.sql.DataSource;
-import javax.sql.rowset.JdbcRowSet;
-import java.security.Key;
 import java.sql.*;
 import java.util.*;
 import java.sql.Connection;
