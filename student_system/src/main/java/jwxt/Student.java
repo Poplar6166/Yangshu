@@ -32,7 +32,11 @@ public class Student {
         this.studentBanji = banji;
         this.studentBandaoshi = bandaoshi;
     }
-
+    public void setStudent(long stuID,String stuName,String stuClass) {
+        this.studentId = stuID;
+        this.studentName = stuName;
+        this.studentClass = stuClass;
+    }
     public Student() {
 
     }

@@ -7,11 +7,12 @@ import java.util.List;
 public interface SuperStudentsql {
 
     List<Student> getAll();
-    List<Student> getGrade();
+    List<Student> getGrade(Long stuID);
+    List<Student> getStudent(long tcID);
 
 
     void add(Student student);
-    boolean studentdelete(long stuID);
+    boolean studentDelete(long stuID);
     boolean changeStudent(String password,long id);
     String findStudent(long stuID);
     boolean login(long stuID,String password);

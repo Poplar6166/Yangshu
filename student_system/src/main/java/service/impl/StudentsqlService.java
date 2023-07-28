@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class StudentsqlService implements SuperStudentsql {
     Map<Long, Student> data = new HashMap<>();
-    public List<Student> getGrade(){
+    public List<Student> getGrade(Long stuID){
         return null;
     }
     public boolean changeStudent(String password,long id){
@@ -27,10 +27,12 @@ public class StudentsqlService implements SuperStudentsql {
     }
 
     @Override
-    public boolean studentdelete(long stuID) {
+    public boolean studentDelete(long stuID) {
         return false;
     }
-
+    public List<Student> getStudent(long tcID){
+        return null;
+    }
 
     public String findStudent(long stuID) {
         return null;

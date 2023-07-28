@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface SuperTeachersql {
     List<Teacher> getAll();
-    List<Teacher> getStudent(long tcID);
     String findTeacher(long id);
     void add(Teacher teacher);
     boolean delete(long id);

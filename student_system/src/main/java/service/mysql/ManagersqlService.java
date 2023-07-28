@@ -85,7 +85,6 @@ public class ManagersqlService implements SuperManagersql {
             try(PreparedStatement ps = coon.prepareStatement("SELECT mgID,mgName FROM Manager WHERE mgID = ?")){
                 ps.setObject(1,mgID);
                 ResultSet rs = ps.executeQuery();
-                int n = ps.executeUpdate();
                 while(rs.next()) {
                     return "您的ID: " + rs.getLong("mgID") + " 您的姓名: "
                             + rs.getString("mgName");

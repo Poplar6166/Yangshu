@@ -32,11 +32,7 @@ public class Teacher {
         this.TeacherId = tcID;
         this.TeacherPassword = tcpassword;
     }
-    public void setStudent(long stuID,String stuName,String stuClass) {
-        this.studentID = stuID;
-        this.studentName = stuName;
-        this.studentClass = stuClass;
-    }
+
     public void changepassword(String teacherPassword){
         this.TeacherPassword = teacherPassword;
     }

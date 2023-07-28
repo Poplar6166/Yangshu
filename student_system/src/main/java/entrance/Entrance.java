@@ -52,23 +52,27 @@ public class Entrance {
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
                         case 0 :
-                            List<Student> studentgrade = studentService.getGrade();
+                            List<Student> studentgrade = studentService.getGrade(stuid);
                             for(Student studentGrade : studentgrade)
-                                System.out.println("课程号为 " + studentGrade.getcsID() + " ,成绩为: " + studentGrade.getStuGrade());
+                                System.out.println("课程号为: " + studentGrade.getcsID() + " ,成绩为: " + studentGrade.getStuGrade());
                             break;
                         case 1 :
                             String studentinformation = studentService.findStudent(stuid);
                             System.out.println(studentinformation);
                             break;
                         case 2:
-                            Student student = new Student();
-                            System.out.println("请输入你新的密码");
-                            studentService.changeStudent(scanner.nextLine(), stuid);
+                            scanner.nextLine();
+                            System.out.println("请输入你新的密码: ");
+                            if(studentService.changeStudent(scanner.nextLine(), stuid)){
+                                System.out.println("修改成功!");
+                            }else {
+                                System.out.println("修改失败!");
+                            }
                             break;
                         default:
                             return;
                     }
-
+                    break;
                 case 2:
                     Teacher tclogin = new Teacher();
                     System.out.println("请输入您的账号(教师编号) : ");
@@ -95,13 +99,13 @@ public class Entrance {
                             System.out.println(teacherinformation);
                             break;
                         case 1:
-                            List<Teacher> student = teacherService.getStudent(tcid);
-                            for(Teacher students : student){
-                                System.out.println(students);
-                            }
+                            List<Student> student = studentService.getStudent(tcid);
+                            for(Student students : student)
+                                System.out.println("学生学号: " + students.getStuID() + " ,学生姓名: " +
+                                        students.getStuName() + " ,学生班级: " +  students.getstuClass());
                             break;
                         case 2:
-                            System.out.println("请输入您需要添加的学生的学号: ");
+                            System.out.println("请输入您需要添加成绩的学生的学号: ");
                             long stuID = scanner.nextLong();
                             scanner.nextLine();
                             System.out.println("请输入他的成绩(请手下留情!)");
@@ -111,15 +115,21 @@ public class Entrance {
                             }else {
                                 System.out.println("添加失败,请确认是否正确输入学号");
                             }
+                            scanner.nextLine();
                             break;
                         case 3:
-                            Teacher teacher = new Teacher();
+                            scanner.nextLine();
                             System.out.println("请输入你新的密码");
-                            teacherService.changeTeacher(scanner.nextLine(),tcid);
+                            if(teacherService.changeTeacher(scanner.nextLine(),tcid)){
+                             System.out.println("修改成功!");
+                            }else {
+                                System.out.println("修改失败!");
+                            }
                             break;
                         default:
                             return;
                     }
+                    break;
                 case 3:
                     Manager mglogin = new Manager();
                     System.out.println("请输入您的账号(管理员编号) : ");
@@ -149,46 +159,50 @@ public class Entrance {
                             System.out.println("其他选项 : 返回上一步");
                             System.out.println("请输入您的选择 : ");
                             Student student = new Student();
-                            if(scanner.nextInt() == 1){
-                                System.out.println("请输入学生的ID: ");
-                                long stuID = scanner.nextLong();
-                                scanner.nextLine();
-                                System.out.println("请输入学生的姓名: ");
-                                String stuName = scanner.nextLine();
-                                System.out.println("请输入学生的班级: ");
-                                String stuClass = scanner.nextLine();
-                                student.setStudnet(stuID,stuName,stuClass);
-                                studentService.add(student);
-                            } else if (scanner.nextInt() ==2) {
-                                System.out.println("请输入需要删除的学生信息的ID: ");
-                                long stuID = scanner.nextLong();
-                                scanner.nextLine();
-                                if(studentService.studentdelete(stuID)){
-                                    System.out.println("删除成功!");
-                                }else{
-                                    System.out.println("删除失败,请确认输入的学号是否正确");
-                                }
-                            } else if (scanner.nextInt() == 3) {
+                            switch (scanner.nextInt()){
+                                case 1:
+                                    System.out.println("请输入学生的ID: ");
+                                    long stuID = scanner.nextLong();
+                                    scanner.nextLine();
+                                    System.out.println("请输入学生的姓名: ");
+                                    String stuName = scanner.nextLine();
+                                    System.out.println("请输入学生的班级: ");
+                                    String stuClass = scanner.nextLine();
+                                    student.setStudnet(stuID,stuName,stuClass);
+                                    studentService.add(student);
+                                    break;
+                                case 2:
+                                    System.out.println("请输入需要删除的学生信息的ID: ");
+                                    long deletestuID = scanner.nextLong();
+                                    scanner.nextLine();
+                                    if(studentService.studentDelete(deletestuID)){
+                                        System.out.println("删除成功!");
+                                    }else{
+                                        System.out.println("删除失败,请确认输入的学号是否正确");
+                                    }
+                                    break;
+                                case 3:
                                     System.out.println("请输入需要修改的学生信息的ID: ");
-                                    Long stuID = scanner.nextLong();
+                                    Long changestuID = scanner.nextLong();
                                     scanner.nextLine();
                                     System.out.println("请输入新的学生姓名: ");
-                                    String stuName = scanner.nextLine();
+                                    String changestuName = scanner.nextLine();
                                     System.out.println("请输入新的学生班级: ");
-                                    String stuClass = scanner.nextLine();
-                                    if(studentService.changeStudentInformation(stuID,stuName,stuClass)){
+                                    String changestuClass = scanner.nextLine();
+                                    if(studentService.changeStudentInformation(changestuID,changestuName,changestuClass)){
                                         System.out.println("修改成功!");
                                     }else {
                                         System.out.println("修改失败,请重新确认输入的学号是否正确");
                                     }
-                            } else if (scanner.nextInt() == 4) {
+                                    break;
+                                case 4:
                                     System.out.println("请输入需要查找的学生的信息: ");
-                                    long stuID = scanner.nextLong();
-                                    scanner.nextLine();
-                                    String showstudent = studentService.findStudent(stuID);
+                                    long findstuID = scanner.nextLong();
+                                    String showstudent = studentService.findStudent(findstuID);
                                     System.out.println(showstudent);
-                            }else{
-                                break;
+                                    break;
+                                default:
+                                    break;
                             }
                             break;
                         case 1:
@@ -199,42 +213,47 @@ public class Entrance {
                             System.out.println("其他选项 : 返回上一步");
                             System.out.println("请输入您的选择 : ");
                             Teacher teacher = new Teacher();
-                            if(scanner.nextInt() == 1){
-                                System.out.println("请输入教师的ID: ");
-                                long tcID = scanner.nextLong();
-                                scanner.nextLine();
-                                System.out.println("请输入教师的姓名: ");
-                                String tcName = scanner.nextLine();
-                                teacher.setTeacher(tcID,tcName);
-                                teacherService.add(teacher);
-                            } else if (scanner.nextInt() ==2) {
-                                System.out.println("请输入需要删除的教师信息的ID: ");
-                                long tcID = scanner.nextLong();
-                                scanner.nextLine();
-                                if(teacherService.delete(tcID)){
-                                    System.out.println("删除成功!");
-                                }else{
-                                    System.out.println("删除失败,请确认输入的教师号是否正确");
-                                }
-                            } else if (scanner.nextInt() == 3) {
+                            switch (scanner.nextInt()){
+                                case 1:
+                                    System.out.println("请输入教师的ID: ");
+                                    long tcID = scanner.nextLong();
+                                    scanner.nextLine();
+                                    System.out.println("请输入教师的姓名: ");
+                                    String tcName = scanner.nextLine();
+                                    teacher.setTeacher(tcID,tcName);
+                                    teacherService.add(teacher);
+                                    break;
+                                case 2:
+                                    System.out.println("请输入需要删除的教师信息的ID: ");
+                                    long deletetcID = scanner.nextLong();
+                                    scanner.nextLine();
+                                    if(teacherService.delete(deletetcID)){
+                                        System.out.println("删除成功!");
+                                    }else{
+                                        System.out.println("删除失败,请确认输入的教师号是否正确");
+                                    }
+                                    break;
+                                case 3:
                                 System.out.println("请输入需要修改的教师信息的ID: ");
-                                Long tcID = scanner.nextLong();
+                                Long changetcID = scanner.nextLong();
                                 scanner.nextLine();
                                 System.out.println("请输入新的教师姓名: ");
-                                String tcName = scanner.nextLine();
-                                if(teacherService.changeTeacherInformation(tcID,tcName)){
+                                String changetcName = scanner.nextLine();
+                                if(teacherService.changeTeacherInformation(changetcID,changetcName)){
                                     System.out.println("修改成功!");
                                 }else {
                                     System.out.println("修改失败,请重新确认输入的教师号是否正确");
                                 }
-                            } else if (scanner.nextInt() == 4) {
-                                System.out.println("请输入需要查找的教师的信息: ");
-                                long tcID = scanner.nextLong();
-                                scanner.nextLine();
-                                String showteacher = teacherService.findTeacher(tcID);
-                                System.out.println(showteacher);
-                            }else{
                                 break;
+                                case 4:
+                                    System.out.println("请输入需要查找的教师的信息: ");
+                                    long findtcID = scanner.nextLong();
+                                    scanner.nextLine();
+                                    String showteacher = teacherService.findTeacher(findtcID);
+                                    System.out.println(showteacher);
+                                    break;
+                                default:
+                                    break;
                             }
                             break;
                         case 2:
@@ -242,7 +261,7 @@ public class Entrance {
                             System.out.println(managerInformation);
                             break;
                         case 3:
-                            Manager manager = new Manager();
+                            scanner.nextLine();
                             System.out.println("请输入你新的密码");
                             managerService.changeManager(scanner.nextLine(),mgid);
                             break;
@@ -250,6 +269,7 @@ public class Entrance {
                             return;
 
                     }
+                    break;
 
                     /*System.out.println("choise 0 : ");
                     System.out.println("choise 1 : 对教师进行操作");
