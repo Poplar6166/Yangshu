@@ -24,10 +24,10 @@ public class Entrance {
         while(true) {
             System.out.println("\uD83D\uDE18 " + "欢迎来到教务管理系统 : ");
             System.out.println("\uD83D\uDE0E" + "以下是教务系统的各个端口 :");
-            System.out.println("choise 0 : 离开教务管理系统");
-            System.out.println("choise 1 : 学生端");
-            System.out.println("choise 2 : 教师端");
-            System.out.println("choise 3 : 教务处管理端");
+            System.out.println("选项 0 : 离开教务管理系统");
+            System.out.println("选项 1 : 学生端");
+            System.out.println("选项 2 : 教师端");
+            System.out.println("选项 3 : 教务处管理端");
             System.out.println("\uD83E\uDD14" + "请选择你要进入的端口 : ");
             int choise = scanner.nextInt();
             switch (choise){
