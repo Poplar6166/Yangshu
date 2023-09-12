@@ -1,6 +1,5 @@
 package jwxt;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Student {
