@@ -148,7 +148,7 @@ public class ManagerEntrance {
                 scanner.nextLine();
                 System.out.println("请输入你新的密码");
                 managerService.changeManager(scanner.nextLine(),mgid);
-                return Entrance;
+                break;
             default:
                 break;
         }

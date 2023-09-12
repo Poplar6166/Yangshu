@@ -17,9 +17,9 @@ public class Entrance {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        SuperStudentsql studentService = new StudentsqlService();
+        /*SuperStudentsql studentService = new StudentsqlService();
         SuperTeachersql teacherService = new TeachersqlService();
-        SuperManagersql managerService = new ManagersqlService();
+        SuperManagersql managerService = new ManagersqlService();*/
 
         while (true) {
             System.out.println("\uD83D\uDE18 " + "欢迎来到教务管理系统 : ");
