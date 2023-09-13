@@ -7,7 +7,8 @@ import java.util.*;
 import java.sql.Connection;
 
 public class ManagersqlService implements SuperManagersql {
-    Map<Long, Manager> data = new HashMap<>();
+    /*Map<Long, Manager> data = new HashMap<>();*/
+    /*获取所有的管理员信息*/
     public List<Manager> getAll() {
         List<Manager> result = new ArrayList<>();
         try (Connection coon = JDBCTemplate.getInstance()) {
@@ -26,7 +27,7 @@ public class ManagersqlService implements SuperManagersql {
         }
         return result;
     }
-
+    /*添加管理员信息*/
     public void add(Manager manager) {
         try (Connection coon = JDBCTemplate.getInstance()) {
             try (PreparedStatement ps = coon.prepareStatement("INSERT INTO Manager VALUES (?,?)")) {
@@ -42,7 +43,7 @@ public class ManagersqlService implements SuperManagersql {
             throw new RuntimeException(e);
         }
     }
-
+    /*删除管理员信息*/
     public boolean delete(long id) {
         try (Connection coon = JDBCTemplate.getInstance()) {
             try (PreparedStatement ps = coon.prepareStatement("DELETE FROM Manager WHERE managerID = ?")) {
@@ -56,7 +57,7 @@ public class ManagersqlService implements SuperManagersql {
         }
         return false;
     }
-
+    /*修改管理员姓名*/
     public boolean change(Manager manager) {
         try (Connection coon = JDBCTemplate.getInstance()) {
             try (PreparedStatement ps = coon.prepareStatement("UPDATE Manager SET managerName = ? WHERE managerID = ?")) {
@@ -71,8 +72,7 @@ public class ManagersqlService implements SuperManagersql {
         }
         return false;
     }
-
-
+    /*查找管理员自己的信息*/
     public String findManager(long mgID){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("SELECT mgID,mgName FROM Manager WHERE mgID = ?")){
@@ -88,6 +88,7 @@ public class ManagersqlService implements SuperManagersql {
         }
         return null;
     }
+    /*管理员登录功能*/
     public boolean login(long mgID,String mgPassword){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("SELECT mgID,mgpassword FROM Manager WHERE mgID = ? and mgpassword = ?")){
@@ -104,6 +105,7 @@ public class ManagersqlService implements SuperManagersql {
         }
         return false;
     }
+    /*修改管理员密码*/
     public boolean changeManager(String password,long id){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("UPDATE Manager SET mgpassword = ? WHERE mgID = ?")){
@@ -118,5 +120,18 @@ public class ManagersqlService implements SuperManagersql {
         }
         return false;
     }
-
+    /*确定是否开设课程*/
+    public boolean setCourse(long ifopen,long csID){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("UPDATE Course SET ifopen = ? WHERE csID = ?")){
+                ps.setObject(1,ifopen);
+                ps.setObject(2,csID);
+                int n = ps.executeUpdate();
+            }
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }

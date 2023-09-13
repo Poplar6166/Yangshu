@@ -19,6 +19,9 @@ public class StudentsqlService implements SuperStudentsql {
     public List<Student> getAll(){
         return data.values().stream().toList();
     }
+    public boolean selectCourse(long scID,long stuID,long csID,long tcID){
+        return false;
+    }
     public Student show(long stuID){
         return data.get(stuID);
     }

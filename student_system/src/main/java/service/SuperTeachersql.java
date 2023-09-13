@@ -15,4 +15,5 @@ public interface SuperTeachersql {
     boolean setStudentGrade(long stuID,long stuGrade);
     boolean changeTeacher(String tcpassword,long tcID);
     boolean changeTeacherInformation(long tcID,String tcName);
+    boolean setCourse(String csName,long tcID);
 }

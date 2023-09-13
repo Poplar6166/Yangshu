@@ -18,7 +18,9 @@ public class TeachersqlService implements SuperTeachersql {
     public String findTeacher(long id) {
         return null;
     }
-
+    public boolean setCourse(String csName,long tcID){
+        return false;
+    }
     public void add(Teacher teacher){
         data.put(teacher.getTeacherId(),teacher);
     }

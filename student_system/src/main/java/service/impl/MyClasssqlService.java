@@ -9,6 +9,9 @@ import java.util.Map;
 
 public class MyClasssqlService implements SuperMyClasssql {
     Map<Long, MyClass> data = new HashMap<>();
+    public List<MyClass> getAllclass(){
+        return null;
+    }
     public List<MyClass> getAll(){
         return data.values().stream().toList();
     }

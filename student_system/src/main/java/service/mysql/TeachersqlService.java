@@ -11,6 +11,7 @@ import java.util.List;
 public class TeachersqlService implements SuperTeachersql {
 
     Map<String,Teacher> data = new HashMap<>();
+    /*获取全部老师的信息*/
     public List<Teacher> getAll(){
     List<Teacher> result = new ArrayList<>();
     try(Connection coon = JDBCTemplate.getInstance()){
@@ -30,7 +31,7 @@ public class TeachersqlService implements SuperTeachersql {
     }
         return result;
     }
-
+    /*查找老师的信息*/
     public String findTeacher(long tcID){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("SELECT tcID,tcName FROM Teacher WHERE tcID = ?")){
@@ -47,9 +48,10 @@ public class TeachersqlService implements SuperTeachersql {
         return null;
     }
 
-    public Teacher show(String id){
+    /*public Teacher show(String id){
         return data.get(id);
-    }
+    }*/
+    /*添加老师的信息*/
     public void add(Teacher teacher){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("INSERT INTO Teacher(tcID,tcName) VALUES (?,?)")){
@@ -65,6 +67,7 @@ public class TeachersqlService implements SuperTeachersql {
             throw new RuntimeException(e);
         }
     }
+    /*删除老师的信息(由管理员操作)*/
     public boolean delete(long id) {
         try (Connection coon = JDBCTemplate.getInstance()) {
             try(PreparedStatement ps = coon.prepareStatement("DELETE FROM Teacher WHERE tcID = ?")){
@@ -78,9 +81,10 @@ public class TeachersqlService implements SuperTeachersql {
         }
         return false;
     }
+    /*修改老师的信息*/
     public boolean change(Teacher teacher){
         try(Connection coon = JDBCTemplate.getInstance()){
-            try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET teacherName = ? WHERE teacherID = ?")){
+            try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET tcName = ? WHERE tcID = ?")){
                 ps.setObject(1,teacher.getTeacherName());
                 ps.setObject(2,teacher.getTeacherId());
                 int n = ps.executeUpdate();
@@ -92,7 +96,7 @@ public class TeachersqlService implements SuperTeachersql {
         }
         return false;
     }
-
+    /*教师的登录功能*/
     @Override
     public boolean login(long tcID, String tcpassword) {
         try (Connection coon = JDBCTemplate.getInstance()) {
@@ -110,8 +114,7 @@ public class TeachersqlService implements SuperTeachersql {
         }
         return false; // 如果没有匹配的记录，返回false
     }
-
-
+    /*添加学生的成绩*/
     public boolean setStudentGrade(long stuID,long stuGrade){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("UPDATE SC SET stugrade = ? WHERE stuID = ?")){
@@ -126,6 +129,7 @@ public class TeachersqlService implements SuperTeachersql {
         }
         return false;
     }
+    /*修改自己的密码*/
     public boolean changeTeacher(String password,long id){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET tcpassword = ? WHERE tcID = ?")){
@@ -140,9 +144,10 @@ public class TeachersqlService implements SuperTeachersql {
         }
         return false;
     }
+    /*修改自己的信息*/
     public boolean changeTeacherInformation(long tcID,String tcName){
         try(Connection coon = JDBCTemplate.getInstance()){
-            try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET tcpassword = '123456',tcName = ? WHERE tcID = ?")){
+            try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET tcName = ? WHERE tcID = ?")){
                 ps.setObject(1,tcName);
                 ps.setObject(2,tcID);
                 int n = ps.executeUpdate();
@@ -154,4 +159,20 @@ public class TeachersqlService implements SuperTeachersql {
         }
         return false;
     }
+    /*开设新课程*/
+    public boolean setCourse(String csName,long tcID){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("INSERT INTO Course(csName,tcID) VALUES (?,?)")){
+                ps.setObject(1,csName);
+                ps.setObject(2,tcID);
+                int n = ps.executeUpdate();
+            }
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    /*课程教师设定，是否开设的开关默认0由管理员添加，如果id不为1则学生无法选这个课程*/
 }

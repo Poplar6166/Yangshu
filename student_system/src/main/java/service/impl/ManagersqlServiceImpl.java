@@ -31,6 +31,7 @@ public class ManagersqlServiceImpl implements SuperManagersql {
     public boolean login(long mgID,String mgPassword){
         return false;
     }
+    public boolean setCourse(long ifopen,long csID){return false;}
     public boolean changeManager(String password,long id){
         return false;
     }

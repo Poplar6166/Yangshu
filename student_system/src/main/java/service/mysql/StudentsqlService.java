@@ -1,5 +1,6 @@
 package service.mysql;
 
+import jwxt.MyClass;
 import jwxt.Student;
 import service.SuperStudentsql;
 import util.JDBCTemplate;
@@ -9,7 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentsqlService implements SuperStudentsql {
-
+    /*获取所有课程*/
+    public List<MyClass> getAllclass(){
+        List<MyClass> result = new ArrayList<>();
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(Statement stmt = coon.createStatement()){
+                try(ResultSet rs = stmt.executeQuery("SELECT csID,csName,tcID,ifopen FROM Course")){
+                    while (rs.next()){
+                        long csid = rs.getLong("csID");
+                        String name = rs.getString("csName");
+                        long tcid = rs.getLong("tcID");
+                        long ifopen = rs.getLong("ifopen");
+                        MyClass myClass = new MyClass();
+                        myClass.setClass(csid,name,tcid,ifopen);
+                        result.add(myClass);
+                    }
+                }
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+    /*获取所有学生的信息*/
     @Override
     public List<Student> getAll() {
         List<Student> result = new ArrayList<>();
@@ -31,6 +54,7 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return result;
     }
+    /*添加学生的功能*/
     @Override
     public void add(Student student) {
         try(Connection coon = JDBCTemplate.getInstance()){
@@ -48,9 +72,7 @@ public class StudentsqlService implements SuperStudentsql {
             throw new RuntimeException(e);
         }
     }
-
-    @Override
-
+    /*删除学生的功能*/
     public boolean studentDelete(long stuID) {
         try (Connection coon = JDBCTemplate.getInstance()) {
             try (PreparedStatement ps = coon.prepareStatement("DELETE FROM SC WHERE stuID = ?")) {
@@ -71,6 +93,7 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return false;
     }
+    /*获取老师所教学的所有学生以及其所在班级的功能*/
     public List<Student> getStudent(long tcID) {
         List<Student> result = new ArrayList<>();
         try (Connection coon = JDBCTemplate.getInstance()) {
@@ -91,8 +114,7 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return result;
     }
-
-
+    /*学生自己修改密码*/
     public boolean changeStudent(String password,long id){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("UPDATE Student SET stuPassword = ? WHERE stuID = ?")){
@@ -107,6 +129,7 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return false;
     }
+    /*修改学生信息*/
     public boolean changeStudentInformation(long stuID,String stuName,String stuClass){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("UPDATE Student SET stuPassword = '123456',stuName = ?,stuClass = ? WHERE stuID = ?")){
@@ -122,6 +145,7 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return false;
     }
+    /*查询学生信息的功能*/
     public String findStudent(long stuID) {
         try (Connection coon = JDBCTemplate.getInstance()) {
             try (PreparedStatement ps = coon.prepareStatement("SELECT stuID,stuName,stuClass FROM Student WHERE stuID = ?")) {
@@ -138,6 +162,7 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return null;
     }
+    /*学生的登录功能*/
     public boolean login(long stuID, String password) {
         try (Connection coon = JDBCTemplate.getInstance()) {
             try (PreparedStatement ps = coon.prepareStatement("SELECT stuID, stuPassword FROM Student WHERE stuID = ? and stuPassword = ?")) {
@@ -154,10 +179,11 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return false; // 如果没有匹配的记录，返回false
     }
+    /*学生查询自己的成绩*/
     public List<Student> getGrade(Long stuID) {
         List<Student> result = new ArrayList<>();
-        try (Connection conn = JDBCTemplate.getInstance()) {
-            try (PreparedStatement ps = conn.prepareStatement("SELECT csID,stugrade FROM SC WHERE stuID = ?")) {
+        try (Connection coon = JDBCTemplate.getInstance()) {
+            try (PreparedStatement ps = coon.prepareStatement("SELECT csID,stugrade FROM SC WHERE stuID = ?")) {
                 ps.setObject(1,stuID);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -172,6 +198,25 @@ public class StudentsqlService implements SuperStudentsql {
             throw new RuntimeException(e);
         }
         return result;
+    }
+    /*选课的功能*/
+    public boolean selectCourse(long scID,long stuID,long csID,long tcID){
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(PreparedStatement ps = coon.prepareStatement("INSERT INTO SC(scID,stuID,csID,tcID) VALUES (?,?,?,?)")){
+                ps.setObject(1,scID);
+                ps.setObject(2,stuID);
+                ps.setObject(3,csID);
+                ps.setObject(4,tcID);
+                int n = ps.executeUpdate();
+                if (n > 0) {
+                    return true;
+                }
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 
 }

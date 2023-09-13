@@ -12,6 +12,7 @@ public class MyClass {
     private String sc;
     private Long studentId;
     private Long teacherId;
+    private long ifopen;
     private void setInformation(Long classId,String className,String sc,Long studentId,Long teacherId){
         this.classId = classId;
         this.className = className;
@@ -19,10 +20,11 @@ public class MyClass {
         this.studentId = studentId;
         this.teacherId = teacherId;
     }
-    public void setClass(Long csID,String csName, Long tcID){
+    public void setClass(Long csID,String csName, Long tcID,long IFOPEN){
         this.classId = csID;
         this.className = csName;
         this.teacherId = tcID;
+        this.ifopen = IFOPEN;
     }
     public Long getClassId() {
         return classId;

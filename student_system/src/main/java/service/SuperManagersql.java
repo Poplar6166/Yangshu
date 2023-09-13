@@ -15,5 +15,6 @@ public interface SuperManagersql {
     boolean login(long mgID,String mgPassword);
 
     boolean changeManager(String password,long id);
+    boolean setCourse(long ifopen,long csID);
 
 }
