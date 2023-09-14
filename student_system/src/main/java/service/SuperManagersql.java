@@ -9,6 +9,7 @@ public interface SuperManagersql {
     String findManager(long id);
     void add(Manager manager);
 
+
     boolean delete(long id);
 
     boolean change(Manager manager);

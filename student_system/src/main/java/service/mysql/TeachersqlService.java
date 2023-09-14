@@ -16,12 +16,13 @@ public class TeachersqlService implements SuperTeachersql {
     List<Teacher> result = new ArrayList<>();
     try(Connection coon = JDBCTemplate.getInstance()){
         try (Statement stmt = coon.createStatement()){
-            try (ResultSet rs = stmt.executeQuery("SELECT teacherID,teacherName FROM Teacher")){
+            try (ResultSet rs = stmt.executeQuery("SELECT teacherID,teacherName,tcSdept FROM Teacher")){
                 while(rs.next()) {
                     Teacher teacher = new Teacher();
                     long id = rs.getLong("teacherID");
                     String name = rs.getString("teacherName");
-                    teacher.setTeacher(id, name);
+                    String sdept = rs.getString("tcSdept");
+                    teacher.setTeacher(id, name,sdept);
                     result.add(teacher);
                 }
             }
@@ -54,9 +55,10 @@ public class TeachersqlService implements SuperTeachersql {
     /*添加老师的信息*/
     public void add(Teacher teacher){
         try(Connection coon = JDBCTemplate.getInstance()){
-            try(PreparedStatement ps = coon.prepareStatement("INSERT INTO Teacher(tcID,tcName) VALUES (?,?)")){
+            try(PreparedStatement ps = coon.prepareStatement("INSERT INTO Teacher(tcID,tcName,tcSdept) VALUES (?,?,?)")){
                 ps.setObject(1,teacher.getTeacherId());
                 ps.setObject(2,teacher.getTeacherName());
+                ps.setObject(3,teacher.);
                 int n = ps.executeUpdate();
                 if(n > 0)
                     System.out.println("添加成功!");
@@ -81,6 +83,7 @@ public class TeachersqlService implements SuperTeachersql {
         }
         return false;
     }
+
     /*修改老师的信息*/
     public boolean change(Teacher teacher){
         try(Connection coon = JDBCTemplate.getInstance()){
@@ -115,7 +118,7 @@ public class TeachersqlService implements SuperTeachersql {
         return false; // 如果没有匹配的记录，返回false
     }
     /*添加学生的成绩*/
-    public boolean setStudentGrade(long stuID,long stuGrade){
+    public boolean setStudentGrade(long stuID,long csID,long stuGrade){
         try(Connection coon = JDBCTemplate.getInstance()){
             try(PreparedStatement ps = coon.prepareStatement("UPDATE SC SET stugrade = ? WHERE stuID = ?")){
                 ps.setObject(1,stuGrade);
@@ -166,9 +169,29 @@ public class TeachersqlService implements SuperTeachersql {
                 ps.setObject(1,csName);
                 ps.setObject(2,tcID);
                 int n = ps.executeUpdate();
+                if(n > 0)
+                    return true;
             }
         }
         catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+    public boolean changeClass(String csName,long csCredit,long csHour,String csNature,long tcID){
+        try(Connection coon = JDBCTemplate.getInstance()) {
+            try (PreparedStatement ps = coon.prepareStatement("UPDATE Course SET csCredit = ?,csHour = ?,csNature = ? WHERE csName = ? AND tcID = ?")) {
+                ps.setObject(1, csCredit);
+                ps.setObject(2, csHour);
+                ps.setObject(3, csNature);
+                ps.setObject(4,csName);
+                ps.setObject(5,tcID);
+                int n = ps.executeUpdate();
+                if (n > 0)
+                    return true;
+            }
+        }
+        catch(SQLException e){
             throw new RuntimeException(e);
         }
         return false;

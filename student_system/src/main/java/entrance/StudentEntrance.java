@@ -1,8 +1,10 @@
 package entrance;
 
+import jwxt.MyClass;
 import jwxt.Student;
 import service.mysql.StudentsqlService;
 
+import java.security.PublicKey;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,11 +13,9 @@ public class StudentEntrance {
     StudentsqlService studentService = new StudentsqlService();
     Scanner scanner = new Scanner(System.in);
     public void showgrade(long stuid){
-
         List<Student> studentgrade = studentService.getGrade(stuid);
         for(Student studentGrade : studentgrade)
             System.out.println("课程号为: " + studentGrade.getcsID() + " ,成绩为: " + studentGrade.getStuGrade());
-        return;
     }
     public void studentimformation(long stuid){
         String studentinformation = studentService.findStudent(stuid);
@@ -30,5 +30,24 @@ public class StudentEntrance {
             System.out.println("修改失败！");
         }
     }
-
+    public void showAllCourse(){
+        /*System.out.println(studentService.getAllclass());*/
+        for (MyClass myClass : studentService.getAllclass()) {
+            System.out.println(myClass);
+        }
+    }
+    public void selectCourse(long csid,long stuID){
+        if(studentService.seletcCourse(csid,stuID)){
+            System.out.println("选课成功！");
+        }else{
+            System.out.println("选课失败，可能因为这个课程未开放");
+        }
+    }
+    public void changeStudentinformation(long IDcard,String Address,long stuID){
+        if(studentService.changeStudentinformation(IDcard,Address,stuID)){
+            System.out.println("修改成功");
+        }else {
+            System.out.println("出于某种原因,修改失败!");
+        }
+    }
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 public class Student {
     private long studentId;
     private String studentName;
+    private long courSeID;
     private int studentAge;
     private String studentSex;
     private Date studentYear;
@@ -17,6 +18,7 @@ public class Student {
     private long csID;
     private long stuGrade;
     private String studentClass;
+    private String csName;
 
     public Student(long studentId, String name, int age, String sex, Date year,
                    String phone, String bumen, String sushe, String banji, String bandaoshi){
@@ -44,6 +46,10 @@ public class Student {
         this.studentName = stuName;
         this.studentClass = stuClass;
     }
+    public void addStudent(String stuName,String stuClass){
+        this.studentName = stuName;
+        this.studentClass = stuClass;
+    }
     public void changepassword(String studentPassword){
         this.studentPassword = studentPassword;
     }
@@ -55,7 +61,14 @@ public class Student {
         this.csID = csID;
         this.stuGrade = stuGrade;
     }
+    public void setcsName(String csname){
+        this.csName = csname;
+    }
 
+    public void setClass(long csID,long studentId){
+        this.courSeID = csID;
+        this.studentId = studentId;
+    }
     public long getcsID() {
         return csID;
     }
@@ -84,6 +97,10 @@ public class Student {
 
     public String getStuName() {
         return studentName;
+    }
+
+    public String getcsName(){
+        return csName;
     }
 
     /*public int getStudentAge() {

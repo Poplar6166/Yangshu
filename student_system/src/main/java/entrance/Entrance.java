@@ -53,7 +53,9 @@ public class Entrance {
                     System.out.println("选项 0 : 查看你的成绩");
                     System.out.println("选项 1 : 查看你的信息");
                     System.out.println("选项 2 : 修改你的密码");
-                    /*System.out.println("选项 3 : 查看所有课程");*/
+                    System.out.println("选项 3 : 查看所有课程");
+                    System.out.println("选项 4 : 选择你想学习的课程");
+                    System.out.println("选项 5 : 修改你的信息(仅支持修改密码，身份证和户口所在地)");
                     System.out.println("其他选项 : 退出系统");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
@@ -65,6 +67,21 @@ public class Entrance {
                             break;
                         case 2:
                             studentEntrance.changepassword(stuid);
+                            break;
+                        case 3:
+                            studentEntrance.showAllCourse();
+                            break;
+                        case 4:
+                            System.out.println("请输入您想选择的课程号: ");
+                            long csid = scanner.nextLong();
+                            studentEntrance.selectCourse(csid,stuid);
+                            break;
+                        case 5 :
+                            System.out.println("请输入你的身份证号: ");
+                            long stuIDcard = scanner.nextLong();
+                            System.out.println("请输入你的户口所在地: ");
+                            String Address = scanner.nextLine();
+                            studentEntrance.changeStudentinformation(stuIDcard,Address,stuid);
                             break;
                         default:
                             return;
@@ -86,7 +103,10 @@ public class Entrance {
                     System.out.println("选项 0 : 查看您的信息");
                     System.out.println("选项 1 : 查看您的学生信息");
                     System.out.println("选项 2 : 添加学生的成绩");
-                    System.out.println("选项 3 : 修改密码");
+                    System.out.println("选项 3 : 修改您的密码");
+                    System.out.println("选项 4 : 添加课程");
+                    System.out.println("选项 5 : 修改课程");
+                    /*System.out.println("选项 6 : 查看您课程的学生信息");*/
                     System.out.println("其他选项 : 退出系统");
                     System.out.println("请输入你需要的操作 : ");
                     switch (scanner.nextInt()){
@@ -97,12 +117,15 @@ public class Entrance {
                             teacherEntrance.showTeacherstudent(tcid);
                             break;
                         case 2:
-                            System.out.println("请输入您需要添加成绩的学生的学号: ");
+                            System.out.println("请输入您需要添加成绩的学生的学号: ");/*这里认为老师只能知道自己教的学生的学号，因此无需再匹配课程号*/
                             long stuID = scanner.nextLong();
+                            scanner.nextLine();
+                            System.out.println("请输入您需要添加成绩的学生的课程号: ");
+                            long csID = scanner.nextLong();
                             scanner.nextLine();
                             System.out.println("请输入他的成绩(请手下留情!)");
                             long stugrade = scanner.nextLong();
-                            teacherEntrance.changeGrade(stuID,stugrade);
+                            teacherEntrance.changeGrade(stuID,csID,stugrade);
                             scanner.nextLine();
                             break;
                         case 3:
@@ -113,6 +136,26 @@ public class Entrance {
                             }else {
                                 System.out.println("修改失败!");
                             }
+                            break;
+                        case 4:
+                            System.out.println("请输入你需要添加的课程的名字: ");
+                            teacherEntrance.setClass(tcid,scanner.nextLine());
+                            scanner.nextLine();
+                        case 5:
+                            System.out.println("请输入你需要修改的课程的名字: ");
+                            String csName = scanner.nextLine();
+                            System.out.println("请输入课程学分: ");
+                            long csCredit = scanner.nextLong();
+                            System.out.println("请输入课程学时: ");
+                            long csHour = scanner.nextLong();
+                            System.out.println("请输入课程性质: ");
+                            String csNature = scanner.nextLine();
+                            teacherEntrance.changeClass(tcid,csName,csCredit,csHour,csNature);
+                            break;
+                        case 6:
+                            System.out.println("请输入课程ID");
+                            long classID = scanner.nextLong();
+                            teacherEntrance.findMyClass(classID);
                             break;
                         default:
                             break;
@@ -135,6 +178,7 @@ public class Entrance {
                     System.out.println("选项 1 : 修改老师信息(增删改查)");
                     System.out.println("选项 2 : 查看您的信息");
                     System.out.println("选项 3 : 修改您的密码");
+                    System.out.println("选项 4 : 修改课程信息");
                     System.out.println("其他选项 : 退出系统");
                     System.out.println("请输入您的选择 : ");
                     switch (scanner.nextInt()){
@@ -148,14 +192,11 @@ public class Entrance {
                             Student student = new Student();
                             switch (scanner.nextInt()){
                                 case 1:
-                                    System.out.println("请输入需要添加的学生的ID: ");
-                                    long stuID = scanner.nextLong();
-                                    scanner.nextLine();
-                                    System.out.println("请输入学生所在的系: ");
+                                    System.out.println("请输入需要添加的学生所在的系: ");
                                     String stuDept = scanner.nextLine();
-                                    System.out.println("请输入学生所在的班级: ");
+                                    System.out.println("请输入需要添加的学生所在的班级: ");
                                     String stuClass = scanner.nextLine();
-                                    student.setStudnet(stuID,stuDept,stuClass);
+                                    student.addStudent(stuDept,stuClass);
                                     studentService.add(student);
                                     break;
                                 case 2:
@@ -183,7 +224,7 @@ public class Entrance {
                                     }
                                     break;
                                 case 4:
-                                    System.out.println("请输入需要查找的学生的信息: ");
+                                    System.out.println("请输入您想查找的学生信息的学生ID: ");
                                     long findstuID = scanner.nextLong();
                                     String showstudent = studentService.findStudent(findstuID);
                                     System.out.println(showstudent);
@@ -207,7 +248,9 @@ public class Entrance {
                                     scanner.nextLine();
                                     System.out.println("请输入教师的姓名: ");
                                     String tcName = scanner.nextLine();
-                                    teacher.setTeacher(tcID,tcName);
+                                    System.out.println("请输入教师所在的系: ");
+                                    String sdept = scanner.nextLine();
+                                    teacher.setTeacher(tcID,tcName,sdept);
                                     teacherService.add(teacher);
                                     break;
                                 case 2:
@@ -251,6 +294,9 @@ public class Entrance {
                             scanner.nextLine();
                             System.out.println("请输入你新的密码");
                             managerService.changeManager(scanner.nextLine(),mgid);
+                            break;
+                        case 4:
+
                             break;
                         default:
                             break;

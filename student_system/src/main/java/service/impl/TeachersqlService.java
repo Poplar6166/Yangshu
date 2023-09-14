@@ -45,4 +45,5 @@ public class TeachersqlService implements SuperTeachersql {
     public boolean changeTeacher(String tcpassword,long tcID){
         return false;
     }
+    public boolean changeClass(String csName,long csCredit,long csHour,String csNature,long tcID){return false;}
 }

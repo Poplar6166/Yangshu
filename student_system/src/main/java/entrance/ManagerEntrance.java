@@ -11,5 +11,6 @@ import service.mysql.TeachersqlService;
 import java.util.Scanner;
 
 public class ManagerEntrance {
+Manager manager = new Manager();
 
 }

@@ -17,5 +17,7 @@ public interface SuperStudentsql {
     String findStudent(long stuID);
     boolean login(long stuID,String password);
     boolean changeStudentInformation(long stuID,String stuName,String stuClass);
-    boolean selectCourse(long scID,long stuID,long csID,long tcID);
+    boolean addCourse(long scID,long stuID,long csID,long tcID);
+    boolean seletcCourse(long csID,long stuID);
+    boolean changeStudentinformation(long IDcard,String Address,long stuID);
 }

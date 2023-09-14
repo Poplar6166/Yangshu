@@ -19,7 +19,7 @@ public class StudentsqlService implements SuperStudentsql {
     public List<Student> getAll(){
         return data.values().stream().toList();
     }
-    public boolean selectCourse(long scID,long stuID,long csID,long tcID){
+    public boolean addCourse(long scID,long stuID,long csID,long tcID){
         return false;
     }
     public Student show(long stuID){
@@ -28,7 +28,9 @@ public class StudentsqlService implements SuperStudentsql {
     public void add(Student student){
         data.put(student.getStuID(),student);
     }
-
+    public boolean changeStudentinformation(long IDcard,String Address,long stuID){
+        return false;
+    }
     @Override
     public boolean studentDelete(long stuID) {
         return false;
@@ -39,6 +41,9 @@ public class StudentsqlService implements SuperStudentsql {
 
     public String findStudent(long stuID) {
         return null;
+    }
+    public boolean seletcCourse(long scID,long stuID){
+        return false;
     }
 
     public boolean delete(long stuID){

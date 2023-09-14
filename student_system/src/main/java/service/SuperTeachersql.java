@@ -12,8 +12,9 @@ public interface SuperTeachersql {
     boolean delete(long id);
     boolean login(long tcID,String tcpassword);
     boolean change(Teacher teacher);
-    boolean setStudentGrade(long stuID,long stuGrade);
+    boolean setStudentGrade(long stuID,long csID,long stuGrade);
     boolean changeTeacher(String tcpassword,long tcID);
     boolean changeTeacherInformation(long tcID,String tcName);
     boolean setCourse(String csName,long tcID);
+    boolean changeClass(String csName,long csCredit,long csHour,String csNature,long tcID);
 }

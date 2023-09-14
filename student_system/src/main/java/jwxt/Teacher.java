@@ -12,6 +12,7 @@ public class Teacher {
     private String studentClass;
     private Date TeacherYear;
     private String TeacherPassword;
+    private String TeacherSdept;
     private String TeacherPhone;
     private String TeacherBumen;
     private void setInformation(long teacherid, String name, int age, String sex,
@@ -24,9 +25,10 @@ public class Teacher {
         this.TeacherPhone = phone;
         this.TeacherBumen = bumen;
     }
-    public void setTeacher(long id,String name){
+    public void setTeacher(long id,String name,String sdept){
         this.TeacherId = id;
         this.TeacherName = name;
+        this.TeacherSdept = sdept;
     }
     public void loginTeacher(long tcID , String tcpassword){
         this.TeacherId = tcID;
@@ -46,7 +48,9 @@ public class Teacher {
 
     public String getTeacherName() {return TeacherName;
     }
-
+    public String getTeacherSdept(){
+        return TeacherSdept;
+}
     public int getTeacherAge() {
         return TeacherAge;
     }

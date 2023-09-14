@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class JDBCTemplate {
-    private int count = 0;
+    /*private int count = 0;*/
     // 静态字段引用唯一实例:
     private static final JDBCTemplate INSTANCE = new JDBCTemplate();
 
@@ -46,8 +46,8 @@ public class JDBCTemplate {
         }
     }
 
-    public void print() {
+    /*public void print() {
         System.out.println(++count);
-    }
+    }*/
 
 }
