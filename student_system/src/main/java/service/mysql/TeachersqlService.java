@@ -58,7 +58,7 @@ public class TeachersqlService implements SuperTeachersql {
             try(PreparedStatement ps = coon.prepareStatement("INSERT INTO Teacher(tcID,tcName,tcSdept) VALUES (?,?,?)")){
                 ps.setObject(1,teacher.getTeacherId());
                 ps.setObject(2,teacher.getTeacherName());
-                ps.setObject(3,teacher.);
+                ps.setObject(3,teacher.getTeacherSdept());
                 int n = ps.executeUpdate();
                 if(n > 0)
                     System.out.println("添加成功!");
