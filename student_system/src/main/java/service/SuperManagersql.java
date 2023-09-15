@@ -16,6 +16,8 @@ public interface SuperManagersql {
     boolean login(long mgID,String mgPassword);
 
     boolean changeManager(String password,long id);
-    boolean setCourse(long ifopen,long csID);
-
+    boolean changeCourse(String ifopen,long csID);
+    boolean setaddStatus(long stuid);
+    boolean changeStatus(long changeid,String state,String stu_reward_punish,String sturegister);
+    boolean addStudentEmail(long id,String news);
 }

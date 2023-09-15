@@ -18,7 +18,9 @@ public class Student {
     private long csID;
     private long stuGrade;
     private String studentClass;
+    private String studentNews;
     private String csName;
+    private long teacherID;
 
     public Student(long studentId, String name, int age, String sex, Date year,
                    String phone, String bumen, String sushe, String banji, String bandaoshi){
@@ -38,6 +40,17 @@ public class Student {
         this.studentName = stuName;
         this.studentClass = stuClass;
     }
+    public void setEmail(String news){
+        this.studentNews = news;
+    }
+    public void sentParent(long stuID,long csID,long tcID,long stugrade){
+        this.studentId = stuID;
+        this.csID = csID;
+        this.teacherID = tcID;
+        this.stuGrade = stugrade;
+    }
+
+
     public Student() {
 
     }
@@ -76,8 +89,20 @@ public class Student {
         return studentClass;
     }
 
+    public String getStudentNews() {
+        return studentNews;
+    }
     public long getStuGrade() {
         return stuGrade;
+    }
+    public long getCsID() {
+        return csID;
+    }
+    public long getStudentId(){
+        return studentId;
+    }
+    public long getTeacherID(){
+        return teacherID;
     }
 
     public String getStudentPassword(){

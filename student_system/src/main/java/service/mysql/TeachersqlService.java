@@ -35,12 +35,13 @@ public class TeachersqlService implements SuperTeachersql {
     /*查找老师的信息*/
     public String findTeacher(long tcID){
         try(Connection coon = JDBCTemplate.getInstance()){
-            try(PreparedStatement ps = coon.prepareStatement("SELECT tcID,tcName FROM Teacher WHERE tcID = ?")){
+            try(PreparedStatement ps = coon.prepareStatement("SELECT tcID,tcName,tcSdept FROM Teacher WHERE tcID = ?")){
                 ps.setObject(1,tcID);
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
-                    return "教师ID：" + rs.getLong("tcID") + " 教师姓名："
-                            + rs.getString("tcName");
+                    return "教师ID: " + rs.getLong("tcID") + " 教师姓名: "
+                            + rs.getString("tcName") + " 教师所在系: "
+                            + rs.getString("tcSdept");
                 }
             }
         }catch(SQLException e){
@@ -72,11 +73,24 @@ public class TeachersqlService implements SuperTeachersql {
     /*删除老师的信息(由管理员操作)*/
     public boolean delete(long id) {
         try (Connection coon = JDBCTemplate.getInstance()) {
-            try(PreparedStatement ps = coon.prepareStatement("DELETE FROM Teacher WHERE tcID = ?")){
+            try(PreparedStatement ps = coon.prepareStatement("DELETE FROM SC WHERE tcID = ?")){
                 ps.setObject(1,id);
                 int n = ps.executeUpdate();
-                if(n > 0)
-                    return true;
+                if(n > 0) {
+                    try (PreparedStatement ps2 = coon.prepareStatement("DELETE FROM Course WHERE tcID = ?")) {
+                        ps2.setObject(1, id);
+                        int n2 = ps2.executeUpdate();
+                        if (n2 > 0) {
+                            try (PreparedStatement ps3 = coon.prepareStatement("DELETE FROM Teacher WHERE tcID = ?")) {
+                                ps2.setObject(1, id);
+                                int n3 = ps2.executeUpdate();
+                                if (n3 > 0) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -148,11 +162,12 @@ public class TeachersqlService implements SuperTeachersql {
         return false;
     }
     /*修改自己的信息*/
-    public boolean changeTeacherInformation(long tcID,String tcName){
+    public boolean changeTeacherInformation(long tcID,String tcName,String changeSdept){
         try(Connection coon = JDBCTemplate.getInstance()){
-            try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET tcName = ? WHERE tcID = ?")){
+            try(PreparedStatement ps = coon.prepareStatement("UPDATE Teacher SET tcName = ?,tcSdept = ? WHERE tcID = ?")){
                 ps.setObject(1,tcName);
-                ps.setObject(2,tcID);
+                ps.setObject(2,changeSdept);
+                ps.setObject(3,tcID);
                 int n = ps.executeUpdate();
                 if(n>0)
                     return true;

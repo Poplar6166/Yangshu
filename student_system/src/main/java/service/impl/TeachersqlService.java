@@ -30,7 +30,7 @@ public class TeachersqlService implements SuperTeachersql {
     public boolean change(Teacher teacher){
         return false;
     }
-    public boolean changeTeacherInformation(long tcID,String tcName){
+    public boolean changeTeacherInformation(long tcID,String tcName,String changeSdept){
         return false;
     }
     public List<Teacher> getStudent(long tcID){
@@ -39,7 +39,7 @@ public class TeachersqlService implements SuperTeachersql {
     public boolean login(long tcID,String tcpassword){
         return false;
     }
-    public boolean setStudentGrade(long stuID,long stuGrade){
+    public boolean setStudentGrade(long stuID,long csID,long stuGrade){
         return false;
     }
     public boolean changeTeacher(String tcpassword,long tcID){

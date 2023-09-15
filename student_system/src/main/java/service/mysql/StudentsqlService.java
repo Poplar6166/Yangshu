@@ -30,6 +30,27 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return result;
     }
+    public List<Student> get_All_Student_Grade(){
+        List<Student> result = new ArrayList<>();
+        try(Connection coon = JDBCTemplate.getInstance()){
+            try(Statement stmt = coon.createStatement()){
+                try(ResultSet rs = stmt.executeQuery("SELECT stuID,csID,tcID,stugrade FROM SC ")){
+                    while (rs.next()){
+                        long stuID = rs.getLong("stuID");
+                        long csID = rs.getLong("csID");
+                        long tcID = rs.getLong("tcID");
+                        long stugrade = rs.getLong("stugrade");
+                        Student student = new Student();
+                        student.sentParent(stuID,csID,tcID,stugrade);
+                        result.add(student);
+                    }
+                }
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
 
     /*获取所有课程*/
     public List<MyClass> getAllclass(){
@@ -92,7 +113,7 @@ public class StudentsqlService implements SuperStudentsql {
             throw new RuntimeException(e);
         }
     }
-    /*删除学生的功能*/
+    /*删除学生的功能(先删除Sc表，再删除student表)*/
     public boolean studentDelete(long stuID) {
         try (Connection coon = JDBCTemplate.getInstance()) {
             try (PreparedStatement ps = coon.prepareStatement("DELETE FROM SC WHERE stuID = ?")) {
@@ -126,6 +147,24 @@ public class StudentsqlService implements SuperStudentsql {
                     String stuClass = rs.getString(3);
                     Student student = new Student();
                     student.setStudent(stuID, stuName, stuClass);
+                    result.add(student);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+    public List<Student> findEmail(Long stuID) {
+        List<Student> result = new ArrayList<>();
+        try (Connection coon = JDBCTemplate.getInstance()) {
+            try (PreparedStatement ps = coon.prepareStatement("SELECT news FROM email WHERE stuID = ?")) {
+                ps.setObject(1, stuID);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    String stuEmail = rs.getString(1);
+                    Student student = new Student();
+                    student.setEmail(stuEmail);
                     result.add(student);
                 }
             }
@@ -202,6 +241,27 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return null;
     }
+
+    public String findStatus(long stuID) {
+        try (Connection coon = JDBCTemplate.getInstance()) {
+            try (PreparedStatement ps = coon.prepareStatement("SELECT * FROM statu WHERE stuID = ?")) {
+                ps.setObject(1, stuID);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return "学籍号: " + rs.getLong("stID")
+                            + rs.getLong("stuID")
+                            + rs.getString("stuState")
+                            + rs.getString("stu_reward_punish")
+                            + rs.getString("sturegister");
+                }
+                System.out.println("未找到学生信息");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
     /*学生的登录功能*/
     public boolean login(long stuID, String password) {
         try (Connection coon = JDBCTemplate.getInstance()) {
@@ -258,14 +318,18 @@ public class StudentsqlService implements SuperStudentsql {
         }
         return false;
     }
-    public boolean seletcCourse(long csID,long stuID){
+    public boolean seletcCourse(long csID,long stuID,long tcID){
         try(Connection coon = JDBCTemplate.getInstance()){
-            try(PreparedStatement ps = coon.prepareStatement("INSERT INTO SC(stuID) VALUES (?) " )){
-                ps.setObject(1,stuID);
-                ps.setObject(2,csID);
+            try(PreparedStatement ps = coon.prepareStatement("SELECT * FROM Course WHERE csID = ? AND ifopen LIKE '开放'" )){
+                ps.setObject(1,csID);
                 int n = ps.executeUpdate();
-                if(n > 0)
-                    return true;
+                if(n > 0) {
+                    try(PreparedStatement ps1 = coon.prepareStatement("INSERT INTO SC(stuID,csID,tcID) VALUES (?,?,?)")){
+                        ps.setObject(1,stuID);
+                        ps.setObject(2,csID);
+                        ps.setObject(3,tcID);
+                    }
+                }
             }
         }catch (SQLException e){
             throw new RuntimeException(e);

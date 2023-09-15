@@ -36,8 +36,8 @@ public class StudentEntrance {
             System.out.println(myClass);
         }
     }
-    public void selectCourse(long csid,long stuID){
-        if(studentService.seletcCourse(csid,stuID)){
+    public void selectCourse(long csid,long stuID,long tcid){
+        if(studentService.seletcCourse(csid,stuID,tcid)){
             System.out.println("选课成功！");
         }else{
             System.out.println("选课失败，可能因为这个课程未开放");
@@ -48,6 +48,19 @@ public class StudentEntrance {
             System.out.println("修改成功");
         }else {
             System.out.println("出于某种原因,修改失败!");
+        }
+    }
+    public void findStatus(long stuid){
+        studentService.findStatus(stuid);
+    }
+    public void findEmail(long stuid){
+        for (Student student : studentService.findEmail(stuid)) {
+            System.out.println(student.getStudentNews());
+        }
+    }
+    public void sentParents(){
+        for (Student student : studentService.get_All_Student_Grade()) {
+            System.out.println(student);
         }
     }
 }

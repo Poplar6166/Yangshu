@@ -20,6 +20,9 @@ public class ManagersqlServiceImpl implements SuperManagersql {
     public void add(Manager manager) {
         data.put(manager.getManagerId(), manager);
     }
+    public boolean changeCourse(String ifopen,long csID){return false;}
+    public boolean setaddStatus(long stuid3){return false;}
+    public boolean changeStatus(long changeid,String state,String stu_reward_punish,String sturegister){return false;}
 
     public boolean delete(long id) {
         return false;
@@ -35,4 +38,5 @@ public class ManagersqlServiceImpl implements SuperManagersql {
     public boolean changeManager(String password,long id){
         return false;
     }
+    public boolean addStudentEmail(long id,String news){return false;}
 }

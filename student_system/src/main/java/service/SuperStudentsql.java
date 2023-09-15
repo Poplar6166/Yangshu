@@ -18,6 +18,8 @@ public interface SuperStudentsql {
     boolean login(long stuID,String password);
     boolean changeStudentInformation(long stuID,String stuName,String stuClass);
     boolean addCourse(long scID,long stuID,long csID,long tcID);
-    boolean seletcCourse(long csID,long stuID);
+    boolean seletcCourse(long csID,long stuID,long tcID);
     boolean changeStudentinformation(long IDcard,String Address,long stuID);
+    String findStatus(long stuID);
+    List<Student> findEmail(Long stuID);
 }

@@ -12,6 +12,10 @@ public class MyClass {
     private String sc;
     private Long studentId;
     private Long teacherId;
+    private long CourseCredit;
+
+    private long CourseHour;
+    private String CourseNature;
     private String ifopen;
     private void setInformation(Long classId,String className,String sc,Long studentId,Long teacherId){
         this.classId = classId;
@@ -20,15 +24,25 @@ public class MyClass {
         this.studentId = studentId;
         this.teacherId = teacherId;
     }
-    public void setClass(Long csID,String csName, Long tcID,String IFOPEN){
+    public void setAllClass(Long csID,String csName, Long tcID,long csCredit,long csHour,String csNature,String IFOPEN){
         this.classId = csID;
         this.className = csName;
         this.teacherId = tcID;
+        this.CourseCredit = csCredit;
+        this.CourseHour = csHour;
+        this.CourseNature = csNature;
         this.ifopen = IFOPEN;
+    }
+    public void setClass(long csID,String csName,long tcID,String ifopen){
+        this.classId = csID;
+        this.className = csName;
+        this.teacherId = tcID;
+        this.ifopen = ifopen;
     }
     public Long getClassId() {
         return classId;
     }
+    public long getCourseCredit(){return CourseCredit;}
 
     public String getClassName() {
         return className;
@@ -41,6 +55,9 @@ public class MyClass {
     public Long getStudentId() {
         return studentId;
     }
+    public long getCourseHour(){return CourseHour;}
+    public String getCourseNature(){return CourseNature;}
+    public String getIfopen(){return ifopen;}
 
     public Long getTeacherId() {
         return teacherId;

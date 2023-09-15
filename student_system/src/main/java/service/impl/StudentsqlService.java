@@ -28,6 +28,8 @@ public class StudentsqlService implements SuperStudentsql {
     public void add(Student student){
         data.put(student.getStuID(),student);
     }
+    public String findStatus(long stuID){return null;}
+    public List<Student> findEmail(Long stuID){return null;}
     public boolean changeStudentinformation(long IDcard,String Address,long stuID){
         return false;
     }
@@ -42,7 +44,7 @@ public class StudentsqlService implements SuperStudentsql {
     public String findStudent(long stuID) {
         return null;
     }
-    public boolean seletcCourse(long scID,long stuID){
+    public boolean seletcCourse(long scID,long stuID,long tcID){
         return false;
     }
 
